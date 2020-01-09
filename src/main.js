@@ -9,7 +9,13 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 import vueSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
+
+import './assets/iconfont/iconfont.css'
+import 'element-ui/lib/theme-chalk/display.css';
 Vue.use(vueSwiper);
+
+
+
 
 Vue.use(ElementUI);
 Vue.config.productionTip = false

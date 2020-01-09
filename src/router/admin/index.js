@@ -2,6 +2,12 @@ import Index from '@/views/Admin/index.vue';
 import Home from '@/views/Admin/Home.vue';
 import InfoShow from '@/views/Admin/InfoShow.vue';
 import FoundList from '@/views/Admin/FoundList.vue';
+
+import Person from '@/components/Admin/PersonCenter.vue'
+import Order from '@/views/Admin/Order.vue'
+import Question from '@/views/Admin/Question.vue'
+import User from '@/views/Admin/User.vue'
+import Apply from '@/views/Admin/Apply.vue'
 export default {
   path: '/admin/index',
   component: Index,
@@ -24,7 +30,26 @@ export default {
       path: '/admin/fundlist',
       name: 'fundlist',
       component: FoundList,
-    },
+    },{
+      path: '/admin/PersonCustom',
+      component: Person,
+  },
+  {
+      path: '/admin/Order',
+      component: Order,
+  },
+  {
+      path: '/admin/question',
+      component: Question,
+  },
+  {
+      path: '/admin/user',
+      component: User,
+  },
+  {
+      path: '/admin/apply',
+      component: Apply,
+  }
   ],
 };
 

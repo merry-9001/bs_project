@@ -7,12 +7,12 @@
         text-color="#fff"
         active-text-color="#409eff"
       >
-        <router-link to="/index">
+        <router-link to="/admin/index">
           <el-menu-item index="0">
             <span slot="title">首页</span>
           </el-menu-item>
         </router-link>
-        <template v-for="item in items">
+        <template v-for="item in items" >
             <el-submenu v-if="item.children" :index="item.path" :key="item.path">
                 <template slot="title">
                     <i :class="'el-icon-' +item.icon"></i>
@@ -56,8 +56,35 @@ export default {
               name: "个人信息"
             }
           ]
-        }
-      ]
+        },
+        {
+          icon: "user-solid",
+          name: "私人订制项目",
+          path: "fund1",
+          children: [
+            {
+              path: "/admin/PersonCustom",
+              name: "项目管理"
+            },
+            {
+              path: "/admin/Order",
+              name: "订单管理"
+            }
+          ]
+        },
+        {
+          icon: "s-platform",
+          name: "提问回答",
+          path: "info1",
+          children: [
+            {
+              path: "question",
+              name: "提问中心"
+            }
+          ]
+        },
+      ],
+      
     };
   }
 };

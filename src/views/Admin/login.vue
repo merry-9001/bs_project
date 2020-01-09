@@ -19,12 +19,12 @@
           <el-form-item>
             <el-button type="primary" class="submit_btn" @click="submitForm('loginForm')">登录</el-button>
           </el-form-item>
-          <div class="tiparea">
+          <!-- <div class="tiparea">
             <p>
               还没有账号？现在
               <router-link to="/register">注册</router-link>
             </p>
-          </div>
+          </div> -->
         </el-form>
       </div>
     </section>
@@ -88,7 +88,7 @@ export default {
           this.$store.commit("user/USER_NAME", {
             name: res.data.data.username,
             isAdmin: res.data.data.identity,
-            // userHead:res.data.data.src
+            userHead:res.data.data.src
           });
 
               this.$router.push("/admin/index");

@@ -2,7 +2,7 @@
   <header class="head-nav">
     <el-row>
       <el-col :span="6" class="logo-container">
-        <img src="@/assets/logo.png" class="logo" alt />
+        <img src="@/assets/admin-logo.png" class="logo" alt />
         <span class="title">后台管理</span>
       </el-col>
       <el-col :span="6" class="user">
@@ -12,9 +12,9 @@
             
           </i>
           <div class="welcome">
-          
-            <p class="name comename">欢迎</p>
-            <p class="name avatarname">{{$store.state.user.name}}</p>
+            <span class="name comename">欢迎</span>
+            <br/>
+            <span class="name avatarname">{{$store.state.user.name}}</span>
           </div>
           <span class="username">
             <el-dropdown trigger="click" @command='setDialogInfo' >
@@ -61,6 +61,7 @@ export default {
 };
 </script>
 <style scoped>
+
  .head-nav {
         width: 100%;
         height: 60px;
@@ -108,9 +109,9 @@ export default {
 
     .welcome {
         display: inline-block;
-        width: auto;
-        vertical-align: middle;
-        padding: 0 5px;
+        line-height: 0;
+        /* vertical-align: middle; */
+        padding: 5px 5px 0px 5px;
     }
 
     .name {

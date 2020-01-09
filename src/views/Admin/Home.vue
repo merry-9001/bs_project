@@ -6,8 +6,9 @@
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="less"xs>
     .home {
+        margin: 0;
         width: 100%;
         height: 100%;
         background: url(../../assets/showcase.png) no-repeat;

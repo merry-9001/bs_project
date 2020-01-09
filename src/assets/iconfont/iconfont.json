@@ -1,0 +1,16 @@
+{
+  "id": "1605027",
+  "name": "毕业设计",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "12684938",
+      "name": "首页",
+      "font_class": "icon_huabanfuben",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    }
+  ]
+}

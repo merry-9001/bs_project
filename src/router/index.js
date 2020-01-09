@@ -5,7 +5,7 @@ import Notfound from '@/views/Admin/404.vue';
 import Register from '@/views/Admin/Register.vue';
 import Login from '@/views/Admin/login.vue';
 
-import Home from '@/views/Home.vue';
+// import Home from '@/views/Home.vue';
 import adminRouter from '@/router/admin';
 import userRouter from '@/router/user';
 Vue.use (VueRouter);
@@ -31,10 +31,10 @@ const routes = [
     component: Login,
   },
 
-  {
-    path: '/',
-    redirect: '/login',
-  },
+  // {
+  //   path: '/',
+  //   redirect: '/index',
+  // },
   // {
   //   path: '/',
   //   name: 'home',

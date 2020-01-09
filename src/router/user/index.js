@@ -13,7 +13,7 @@ export default {
     component: Home,
     children: [{
         path: '/',
-        component: Login
+        component: Index
     },
     {
         path: 'login',

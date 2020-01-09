@@ -1,83 +1,54 @@
 <template>
   <el-header>
-    <el-row>
-      <el-col :span="10">
+    <el-row type="flex">
+      <el-col :xs="24" :lg="10"  class="hidden-xs-only">
         <div class="grid-content headwidth">
-          <router-link class="headspan" to="/index" >私人订制首页&nbsp;</router-link>
+          <i class="iconfont icon-icon_huabanfuben"></i>
+          <!-- <router-link class="headspan" to="/index">私人订制首页&nbsp;</router-link> -->
           <router-link class="headspan" to="/Product">商品介绍&nbsp;</router-link>
           <router-link class="headspan" to="/Qualifications">申请资质</router-link>
         </div>
-
       </el-col>
-      <el-col :span="14">
-        
+      <el-col :xs="24" :lg="14">
         <div class="grid-content headwidth1" v-if="$store.state.user.nickname==''">
-
-          <router-link  to="/login" class="headspan">
-          请登录&nbsp;
-          </router-link>
-          <router-link  to="/register" class="headspan">
-          免费注册
-          </router-link>
-                       <!-- <router-link to="/register">注册</router-link> -->
+          <router-link to="/login" class="headspan">请登录&nbsp;</router-link>
+          <router-link to="/register" class="headspan">免费注册</router-link>
         </div>
         <div v-else class="headwidth1">
-      <el-badge v-if="f==0" class="item">
-<el-button size="mini" icon="el-icon-edit" circle
-@click="open()"
-></el-button>
-</el-badge>
-          <el-badge  v-else  :value="f" class="item">
-<el-button size="mini" icon="el-icon-edit" circle
-@click="open()"
-></el-button>
-</el-badge>
-&nbsp;&nbsp;
-          <img :src="$store.state.user.headphoto" class="avatar">
-          <span class=" nickname headspan ">{{$store.state.user.nickname}} &nbsp;&nbsp;&nbsp;</span>
-              <!-- {{$store.state.admin.isAdmin}} -->
-              <i class="el-icon-shopping-cart-full"></i>
-          <!-- <span class="headspan">购物车</span> -->
-          <router-link  to="/cart" class="headspan">
-          购物车
-          </router-link>
-          <router-link  to="/order" class="headspan">
-          &nbsp;&nbsp;订单
-          </router-link>
+          <el-badge v-if="f==0" class="item">
+            <el-button size="mini" icon="el-icon-edit" circle @click="open()"></el-button>
+          </el-badge>
+          <el-badge v-else :value="f" class="item">
+            <el-button size="mini" icon="el-icon-edit" circle @click="open()"></el-button>
+          </el-badge>&nbsp;&nbsp;
+          <img :src="$store.state.user.headphoto" class="avatar" />
+          <span class="nickname headspan">{{$store.state.user.nickname}} &nbsp;&nbsp;&nbsp;</span>
+          <i class="el-icon-shopping-cart-full"></i>
+          <router-link to="/cart" class="headspan">购物车</router-link>
+          <router-link to="/order" class="headspan">&nbsp;&nbsp;订单</router-link>
           <router-link class="headspan" to="/login" @click.native="click">&nbsp;&nbsp;注销</router-link>
         </div>
-<el-dialog
-  title="私人订制"
-  :visible.sync="dialogVisible"
-  width="50%">
+        <!-- <el-dialog title="私人订制" :visible.sync="dialogVisible" width="50%">
+          <span class="red" v-if="flag==1">您好，您的资质申请已通过，账号密码为会员账号</span>
+          <span class="red" v-else-if="flag==-1">您好，您的资质申请未通过</span>
+          <br />
+          <br />
+          <span class="red">提问回答如下</span>
 
-  <span class="red" v-if="flag==1">您好，您的资质申请已通过，账号密码为会员账号</span>
-  <span class="red" v-else-if="flag==-1">您好，您的资质申请未通过</span>
-<br>
-<br>
-  <span class="red">提问回答如下</span>
-
-  <div   v-for="item in question" :key="item.question_id" class="border">
-   <div class="question">
-     <div class="question_content">{{item.question_content}}</div>
-     <div>回答时间：{{item.solve_time}}</div>
-   </div>
-      <div class="Answer">
-   <div class="answer11">回答一：{{item.solve_content1}}</div>
-   <div>回答二：{{item.solve_content2}}</div>
-      </div>
-  </div>
-
-    <!-- <div>
-   asdsaasdas
-  </div> -->
-  <span slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-  </span>
-</el-dialog>
-
-
-
+          <div v-for="item in question" :key="item.question_id" class="border">
+            <div class="question">
+              <div class="question_content">{{item.question_content}}</div>
+              <div>回答时间：{{item.solve_time}}</div>
+            </div>
+            <div class="Answer">
+              <div class="answer11">回答一：{{item.solve_content1}}</div>
+              <div>回答二：{{item.solve_content2}}</div>
+            </div>
+          </div>
+          <span slot="footer" class="dialog-footer">
+            <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+          </span>
+        </el-dialog>-->
       </el-col>
     </el-row>
   </el-header>
@@ -86,143 +57,142 @@
 <script>
 export default {
   name: "headnva",
-  data(){
-    return{
-      f:0,
-      dialogVisible:false,
-      question:[],
-      flag:0
-
-    }
+  data() {
+    return {
+      f: 0,
+      dialogVisible: false,
+      question: [],
+      flag: 0
+    };
   },
   components: {},
-  mounted(){
-      this.refresh();
+  mounted() {
+    this.refresh();
   },
-  methods:{
-    click(){
-          localStorage.removeItem("nickname");
-          localStorage.removeItem("headphoto");
-          localStorage.removeItem("username");
-          this.$store.commit("user/NAME", { nickname: "", headphoto: "", username: ""});
+  methods: {
+    click() {
+      localStorage.removeItem("nickname");
+      localStorage.removeItem("headphoto");
+      localStorage.removeItem("username");
+      this.$store.commit("user/NAME", {
+        nickname: "",
+        headphoto: "",
+        username: ""
+      });
     },
-    open(){
-      var params = new URLSearchParams();
-      params.append("username", this.$store.state.user.username);
-            this.axios
-        .post("/personCustom_api/PersonTp5/public/admin/index/open_slove", params)
-        .then(res=>{
-          console.log(res);
-          this.question=res.data.data;
-          this.flag=res.data.apply.flag;
-          // console.log(this.question);
-        })
-        this.dialogVisible=true;
-        this.refresh();
-      // console.log('asd');
-    },
-    refresh(){
+    open() {
       var params = new URLSearchParams();
       params.append("username", this.$store.state.user.username);
       this.axios
-        .post("/personCustom_api/PersonTp5/public/admin/index/open_index", params)
-        .then(res=>{
-          this.f=res.data.data;
-        })
+        .post(
+          "/personCustom_api/PersonTp5/public/admin/index/open_slove",
+          params
+        )
+        .then(res => {
+          console.log(res);
+          this.question = res.data.data;
+          this.flag = res.data.apply.flag;
+          // console.log(this.question);
+        });
+      this.dialogVisible = true;
+      this.refresh();
+      // console.log('asd');
+    },
+    refresh() {
+      var params = new URLSearchParams();
+      params.append("username", this.$store.state.user.username);
+      this.axios
+        .post(
+          "/personCustom_api/PersonTp5/public/admin/index/open_index",
+          params
+        )
+        .then(res => {
+          this.f = res.data.data;
+        });
     }
   }
 };
 </script>
 <style scoped lang="less">
-.answer11{
-  padding-bottom: 10px;
-}
-.Answer{
-  font-size:18px;
-}
-.red{
-  color:red;
-  font-size: 18px;
-}
-.question{
-  display:flex;
-    // border: 1px yellow solid;
-}
-.border{
-  // border: 1px red solid;
-  padding:10px;
-}
-.question_content{
-  width:66%;
-      // border: 1px blue solid;
-  text-align: center;
-  font-size: 20px;
-  font-weight: bolder;
-}
-.nickname
-{
-  color:red !important;
-}
-    .avatar {
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
+// .answer11 {
+//   padding-bottom: 10px;
+// }
+// .Answer {
+//   font-size: 18px;
+// }
 
-    }
+// .question {
+//   display: flex;
+//   // border: 1px yellow solid;
+// }
+// .border {
+//   // border: 1px red solid;
+//   padding: 10px;
+// }
+// .question_content {
+//   width: 66%;
+//   // border: 1px blue solid;
+//   text-align: center;
+//   font-size: 20px;
+//   font-weight: bolder;
+// }
+
 .headspan.router-link-active {
   color: #43b5f7;
-  text-decoration : none
-  // border-bottom: 2px #43b5f7 solid;
-}
-
-.headspan {
- text-decoration : none;
- color: black;
-}
-
-
-.headspan {
-  line-height: 40px;
-
-}
-.headwidth {
-  width: 50%;
-  margin: 0 auto;
-  text-align: left;
-  //   border: 1px black solid;
-}
-.headwidth1 {
-  width: 50%;
-    // color: red;
-    float:right;
-    display: flex;
-  align-items: center;
-  //   border: 1px black solid;
-}
-.el-row {
-  width: 100%;
-  
-  // border: 1px black solid;
-}
-
-.grid-content {
-  // border-radius: 4px;
-
-  min-height: 40px;
+  text-decoration: none;
 }
 
 .el-header {
-// z-index:100;
-  // height: 100%;
-
-  // position: absolute;
-  // min-height: 9vh!important;
   background-color: #f5f5f5;
-  // color: #333;
-  // text-align: center;
   width: 100%;
-  height: 40px !important;
-  // height:500px;
-  // border: 3px rgb(0, 4, 216) solid;
+  // height: 40px !important;
+  .el-row {
+    .el-col{
+        border: 1px black solid;
+        display:flex;
+    }
+    .headwidth1 {
+      width: 50%;
+      float: right;
+      display: flex;
+      align-items: center;
+
+      .avatar {
+        width: 35px;
+        // height: 35px;
+        border-radius: 50%;
+      }
+      .headspan {
+        text-decoration: none;
+        color: black;
+        // line-height: 40px;
+      }
+      .nickname {
+        color: red !important;
+      }
+    }
+    .headwidth {
+      width:100%;
+      border: 1px black solid;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .headspan {
+        text-decoration: none;
+        color: black;
+        padding-left: 1rem;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+      }
+      .icon-icon_huabanfuben{
+        font-size: 25px;
+      }
+    }
+    .red {
+      color: red;
+      font-size: 18px;
+    }
+  }
 }
 </style>
