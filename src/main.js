@@ -14,7 +14,10 @@ import './assets/iconfont/iconfont.css'
 import 'element-ui/lib/theme-chalk/display.css';
 Vue.use(vueSwiper);
 
+import Video from 'video.js'
+import 'video.js/dist/video-js.css'
 
+Vue.prototype.$video = Video
 
 
 Vue.use(ElementUI);

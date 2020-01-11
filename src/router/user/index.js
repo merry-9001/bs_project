@@ -8,6 +8,11 @@ import Order from '@/views/User/Order.vue'
 import Question from '@/views/User/Question.vue'
 import Product from '@/views/User/Product.vue'
 import Qualifications from '@/views/User/Qualifications.vue'
+import Resources from '@/views/User/Resources.vue'
+import Market from '@/views/User/Market.vue'
+import Video from '@/views/User/Video.vue'
+import Video_detail from '@/views/User/Video_detail.vue'
+import Person from '@/views/User/Person.vue'
 export default {
     path: '/',
     component: Home,
@@ -50,7 +55,29 @@ export default {
     {
         path: 'Qualifications',
         component: Qualifications
+    },
+    {
+        path: 'Resources',
+        component: Resources
     }
-    
+    ,
+    {
+        path: 'Market',
+        component: Market
+    }
+    ,
+    {
+        path: 'Video',
+        component: Video
+    },    
+    {
+        path: 'Video_detail',
+        component: Video_detail
+    }
+    ,    
+    {
+        path: 'Person',
+        component: Person
+    }
     ]
 }

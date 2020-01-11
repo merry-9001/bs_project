@@ -26,14 +26,12 @@ export default {
 <style scoped lang="less">
 .home{
   display: flex;
-            //   display: flex;
   min-height: 100vh;
   flex-flow: column;
 }
 .rightContainer
 {
   flex:1;
-      // border: 3px black solid;
 
 }
 

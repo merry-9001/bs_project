@@ -1,7 +1,7 @@
 <template>
   <div>
     <Logo>
-      <span slot="name">提问</span>
+      <span slot="name">问题填写</span>
     </Logo>
     <div class="table">
       <el-form ref="form" :model="form" label-width="100px">
@@ -86,8 +86,8 @@ export default {
 };
 </script>
 <style scoped lang="less">
-.table{
-  width:50%;
-  margin: 0 auto;
-}
+// .table{
+//   width:50%;
+//   margin: 0 auto;
+// }
 </style>

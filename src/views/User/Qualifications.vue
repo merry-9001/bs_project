@@ -3,7 +3,7 @@
     <Logo>
       <span slot="name">申请资质</span>
     </Logo>
-    <div class="contaniner_table">
+    <div class="contaniner_table-qualification">
       <el-form ref="form" :model="sizeForm" label-width="80px" :rules="rules">
         <el-form-item label="真实姓名" class="input_width" prop="name">
           <el-input v-model="sizeForm.name" width="200"></el-input>
@@ -204,8 +204,5 @@ export default {
 .contaniner {
   width: 100%;
 }
-.contaniner_table {
-  width: 40%;
-  margin: 0 auto;
-}
+
 </style>
