@@ -29,7 +29,7 @@
           <div style="padding: 14px;">
             <span class="price">{{item.project_name}}</span>
             <div>
-              <span class="price">¥{{item.project_price}}起</span>
+              <span class="price">¥{{item.project_price}}</span>
               <span class="price">共有{{item.project_num}}人付款</span>
               <el-button type="primary" plain  @click="ToDetail(item.project_id)">购买</el-button>
             </div>
@@ -54,7 +54,7 @@ export default {
   methods: {
     product_show() {
       this.axios
-        .get("/personCustom_api/PersonTp5/public/admin/index/product_show")
+        .get("/personCustom_api/PersonTp5/public/admin/bs/resource_select")
         .then(res => {
           // console.log(res);
           this.data = res.data.data;

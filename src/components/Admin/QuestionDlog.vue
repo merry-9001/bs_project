@@ -1,15 +1,12 @@
 <template>
 <el-dialog
-  title="请认真回答"
+  title="回答"
   :visible.sync="dialog.show"
   width="40%">
-  <span>{{dialog.question}}</span>
+  <span >{{dialog.question}}</span>
 
-  <div>  <span>回答一
+  <div class="question">  <span>回答内容
               <el-input type="textarea" v-model="slove1"></el-input></span></div>
-
-            <span>回答二</span>
-          <el-input type="textarea" v-model="slove2"></el-input>
   <span slot="footer" class="dialog-footer">
     <el-button type="primary"
      @click="question_sumbit(dialog.id)"
@@ -31,10 +28,8 @@
     methods:{
       question_sumbit(id){
         this.dialog.show=false;
-        this.$emit("update",id,this.slove1,this.slove2);
+        this.$emit("update",id,this.slove1);
         this.slove1="";
-        this.slove2="";
-
       }
     },
         props: {
@@ -44,5 +39,8 @@
   };
 </script>
 <style scoped lang="less">
-
+.question{
+//  border: 1px solid red;
+ padding: 1rem 0px;
+}
 </style>

@@ -4,13 +4,13 @@
       <span slot="name">交易中心</span>
     </Logo>
     <el-row>
-      <el-col :xs="12" :lg="18">
+      <el-col :xs="12" :md="18">
         <div class="col_center1">
           <span>商品展示</span>
         </div>
       </el-col>
 
-      <el-col  :xs="24"  :lg="6">
+      <el-col  :xs="24"  :md="6">
         <div class="col_center1">
           <el-input placeholder="搜索" v-model="input" clearable maxlength="10" width="100"></el-input>
           <el-button @click="search()" icon="el-icon-search"></el-button>
@@ -19,7 +19,7 @@
     </el-row>
 
     <el-row>
-      <el-col :xs="24" :lg="6" v-for="item in data" :key="item.project_id">
+      <el-col :xs="24" :md="6" v-for="item in data" :key="item.project_id">
         <el-card shadow>
           <img :src="item.project_src" class="image" />
           <div style="padding: 14px;">

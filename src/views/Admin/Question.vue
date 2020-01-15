@@ -5,11 +5,8 @@
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="left" class="demo-table-expand">
-            <el-form-item label="问题">
-              <span>{{ props.row.question_content }}</span>
-            </el-form-item>
-            <el-form-item label="价格">
-              <span>{{ props.row.question_price }}</span>
+            <el-form-item label="问题Id">
+              <span>{{ props.row.question_id }}</span>
             </el-form-item>
             <el-form-item label="时间">
               <span>{{ props.row.question_time }}</span>
@@ -20,9 +17,7 @@
           </el-form>
         </template>
       </el-table-column>
-      <el-table-column label="问题ID" prop="question_id"></el-table-column>
-      <el-table-column label="问题类型" prop="question_type_nane"></el-table-column>
-      <el-table-column label="问题关键字" prop="question_key"></el-table-column>
+      <el-table-column label="问题" prop="question_content"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button v-if="scope.row.state==0" size="mini" @click="handleEdit(scope.row)">回答</el-button>
@@ -59,22 +54,20 @@ export default {
       };
       // console.log(row);
     },
-    getPerson(id, slove1, slove2) {
+    getPerson(id, slove1) {
       var params = new URLSearchParams();
       params.append("question_id",id);
       params.append("solve_content1", slove1);
-      params.append("solve_content2",slove2);
       this.axios
-        .post("/personCustom_api/PersonTp5/public/admin/index/question_slove",params)
+        .post("/personCustom_api/PersonTp5/public/admin/bs/question_sumbit",params)
         .then(res => {
           console.log(res);
         });
-      // console.log(id, slove1, slove2);
           this.render();
     },
     render(){
     this.axios
-      .get("/personCustom_api/PersonTp5/public/admin/index/question_select")
+      .get("/personCustom_api/PersonTp5/public/admin/bs/question_select_admin")
       .then(res => {
         //   console.log(res);
         this.tableData1 = res.data.data;

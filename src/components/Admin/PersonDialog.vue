@@ -9,33 +9,23 @@
     >
       <el-form :model="formData" label-width="100px" ref="form"
      >
-        <el-form-item label="活动名称">
-          <el-input v-model="formData.project_name" autocomplete="off"></el-input>
+        <el-form-item label="名称">
+          <el-input  disabled  v-model="formData.project_name" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="定价">
-          <el-input v-model="formData.project_price" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="介绍">
+       
+        <el-form-item label="资源链接">
           <el-input
             type="textarea"
             autosize
-            v-model="formData.project_introduce"
+            v-model="content"
             autocomplete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item label="备注">
-          <el-input type="textarea" autosize v-model="formData.project_remake" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="图片">
-          <input type="file" name="file" value="上传图片" @change="handleToUpload" />
-        </el-form-item>
-        <el-form-item>
-          <img :src="formData.project_src" class="head" />
-        </el-form-item>
+       
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialog.show = false">取 消</el-button>
-        <el-button type="primary" @click="onSubmit('form')">确 定</el-button>
+        <el-button type="primary" @click="onSubmit()">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -53,7 +43,8 @@ export default {
         type: [],
         resource: "",
         desc: ""
-      }
+      },
+      content:""
     };
   },
   props: {
@@ -85,36 +76,17 @@ export default {
           }
         });
     },
-    onSubmit(data) {
-      const f = this.dialog.option;
+    onSubmit() {
+      // const f = this.dialog.option;
+      
       var params = new URLSearchParams();
-      params.append("project_name", this.formData.project_name);
-      params.append("project_price", this.formData.project_price);
-      params.append("project_introduce", this.formData.project_introduce);
-      params.append("project_remake", this.formData.project_remake);
-      params.append("project_src", this.formData.project_src);
+      params.append("project_remake", this.content);
       params.append("project_id", this.formData.project_id);
-      if (f === "add") {
-        this.axios.post("/personCustom_api/personAdd.php", params).then(res => {
+      console.log(this.formData.project_id);
+       console.log(this.content);
+          this.axios.post("/personCustom_api/PersonTp5/public/admin/bs/resource_edit", params).then(res => {
           console.log(res);
-          var stauts = res.data.stauts;
-          // console.log(msg);
-          // var that = this;
-          if (stauts === "ok") {
-            this.dialog.show = false;
-            this.$emit("update");
-            this.$message({
-              message: "添加完成",
-              type: "success"
-            });
-          }
-        });
-      }
-      else{
-        //   personEdit.php
-        //   console.log(this.formData.project_id);
-          this.axios.post("/personCustom_api/personEdit.php", params).then(res => {
-          console.log(res);
+          this.content="";
           var stauts = res.data.msg;
           // console.log(msg);
           // var that = this;
@@ -122,12 +94,12 @@ export default {
             this.dialog.show = false;
             this.$emit("update");
             this.$message({
-              message: "修改完成",
+              message: "上传成功",
               type: "success"
             });
           }
         });
-      }
+      
     }
   }
 };

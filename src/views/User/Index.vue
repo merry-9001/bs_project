@@ -1,51 +1,44 @@
 <template>
   <div class="contaniner-whole">
-    <div class="swip">
-      <swiper :options="swiperOption">
-        <swiper-slide class="swiper-slide" v-for="(item,index) in slide" :key="index">
-          <!-- 我是第{{item}}个轮播图 -->
-          <img :src="item" alt class="img" />
-        </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-        <!-- 分页  -->
-      </swiper>
+    <div class="div_img">
+      <img src="http://47.96.175.28/personCustom_api/images/user/index/l1.jpg" class="img-size" />
     </div>
     <div>
       <el-row>
         <el-col>
-          <div class="col_center">最新上线</div>
+          <div class="col_center1">服务介绍</div>
+          <span class="word">
+            主要为了服务在校的大学生。
+            大学生在校园生活中，经常会遇到取快递或者外卖的情况，
+            却因某些原因不能亲自前往，同时，宿舍囤积了许多买回来只用几次但又弃之可惜的物品。
+            同时网站拥有朋友圈和交流学习的地方，方便学生之间交流。
+            这是一个一个全面、互动性高的综合性交易平台。
+          </span>
+          <el-divider></el-divider>
         </el-col>
       </el-row>
 
-      <el-row>
-        <el-col>
-          <div class="col_center1">私人订制服务</div>
-        </el-col>
-      </el-row>
+      <el-row v-for="item in  personData" :key="item.project_type_id" class="v_for_row">
+              <div >
+     <router-link tag="span" class="title" :to="item.project_type_href">{{item.project_type_name}}</router-link>
+            <!-- <span class="title">     sad</span> -->
 
-      <el-row>
-        <el-col>
-          <div class="contaniner">
-            <div
-              @click="ToDetail(item.project_id)"
-              to="/detail"
-              class="min_contaniner"
-              v-for="item in personData "
-              :key="item.project_id"
-            >
-              <img :src="item.project_src" class="img1" />
-              <span class="price">¥{{item.project_price}}</span>
-              <br />
-              <span class="name">{{item.project_name}}</span>
-              <br />
-              <span class="num">共有{{item.project_num}}人付款</span>
-            </div>
           </div>
+        <el-col :xs="24"  :md="10">
+          
+          <div class="contaniner">
+            <router-link  :to="item.project_type_href">
+              <img :src="item.project_type_img" class="img-size" />
+            </router-link>
+          </div>
+          
         </el-col>
-      </el-row>
-      <el-row>
-        <el-col>
-          <div class="col_center1"></div>
+        <el-col :xs="24"  :md="14">
+          <div class="contaniner2">
+            <span class="content_span">{{item.project_type_content}}</span>
+
+          </div>
+
         </el-col>
       </el-row>
     </div>
@@ -56,39 +49,16 @@
 export default {
   data() {
     return {
-      slide: [
-        "http://47.96.175.28/personCustom_api/images/user/index/l1.jpg",
-        "http://47.96.175.28/personCustom_api/images/user/index/l2.jpg",
-        "http://47.96.175.28/personCustom_api/images/user/index/l3.jpg"
-      ],
-      swiperOption: {
-        //显示分页
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: false //允许分页点击跳转
-        },
-
-        //自动轮播
-        autoplay: {
-          delay: 2000,
-          stopOnLastSlide: false /* 触摸滑动后是否继续轮播 */,
-          disableOnInteraction: false
-        },
-        //开启循环模式
-        loop: true,
-        //开启鼠标滚轮控制Swiper切换
-        mousewheel: true
-      },
       personData: {}
     };
   },
   mounted() {
     this.axios
-      .get("/personCustom_api/PersonTp5/public/admin/index/index")
+      .get("/personCustom_api/PersonTp5/public/admin/bs/project_type")
       .then(res => {
         console.log(res);
-        this.personData = res.data.data.personSelect;
-        //  console.log(this.personData);
+        this.personData = res.data.data;
+         console.log(this.personData);
       });
   },
   methods: {
@@ -101,62 +71,70 @@ export default {
 </script>
 <style scoped lang="less">
 .contaniner-whole {
-  .swip {
-    .swiper-slide {
+  .div_img {
+    .img-size {
       width: 100%;
     }
-    .img {
-      width: 100%;
-      height: 300px;
-    }
   }
-  .col_center {
-    width: 75%;
+  .el-row {
+    // width: 75%;
     margin: 0 auto;
-    font-size: 30px;
-  }
-  .col_center1 {
-    width: 75%;
-    margin: 0 auto;
-    font-size: 20px;
-    padding-bottom: 20px;
-    padding-top: 20px;
-  }
-  .contaniner {
-    width: 75%;
-    height: 290px;
-    margin: 0 auto;
-    display: flex;
-    .min_contaniner {
-      border: 1px #dfdfdf solid;
-      padding: 5px 5px 0px 5px;
-      width: 210px;
-      height: 290px;
-      margin-right: 50px;
-      float: left;
-      background: #dfdfdf;
+    .col_center1 {
+      font-size: 20px;
+      padding-bottom: 20px;
+      padding-top: 20px;
       // border: 1px yellow solid;
-      .num {
-        float: right;
-        padding-right: 5px;
-      }
-      .name {
-        padding-left: 5px;
-      }
-      .price {
-        color: red;
-        font-size: 18px;
-        padding-left: 5px;
-      }
-      .img1 {
-        width: 210px;
-        max-height: 210px;
-        min-height: 210px;
-      }
-      .min_contaniner:hover {
-        border: 1px red solid;
+    }
+    .word {
+      font-size: 1.1rem;
+      // border: 1px yellow solid;
+    }
+    .contaniner {
+      // border: 1px yellow solid;
+      width: 100%;
+      padding-top:0.5rem;
+        display: flex;
+        justify-content: center;
+      .img-size{
+        height:15rem;
+        width: 100%;
       }
     }
+
   }
+  .v_for_row{
+    padding: 2rem 0rem;
+    .title{
+      font-size:20px;
+      font-weight: bold;
+    }
+  }
+}
+@media (max-width: 700px) {
+  .el-row {
+    width: 90%;
+  }
+    .contaniner2{
+                // padding-left: 3rem;
+        
+        .content_span{
+          padding-left: 1rem;
+             line-height: 2rem;
+        }
+
+    }
+}
+@media (min-width: 1000px) {
+  .el-row {
+    width: 75%;
+  }
+    .contaniner2{
+                padding-left: 3rem;
+        .content_span{
+             line-height: 2rem;
+          padding-left: 1rem;
+        }
+
+    }
 }
 </style>

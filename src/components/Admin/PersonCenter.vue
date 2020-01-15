@@ -1,29 +1,12 @@
 <template>
   <div class="container">
         <div class='aa'>
-<!-- " v-model="search_data" -->
-      <el-form  :inline="true">
-        <!-- <el-form-item label="时间筛选"  class="left">
-          <el-date-picker v-model="search_data.startTime" type="datetime" placeholder="选择开始时间"></el-date-picker>--
-          <el-date-picker v-model="search_data.endTime" type="datetime" placeholder="选择结束时间"></el-date-picker>
-          <el-form-item>
-            <el-button type="primary" size="small" icon="search" @click="handleSearch()">筛选</el-button>
-          </el-form-item>
+          <el-breadcrumb separator-class="el-icon-arrow-right">
+        <el-breadcrumb-item>首页</el-breadcrumb-item>
+        <el-breadcrumb-item>私人订制项目</el-breadcrumb-item>
+        <el-breadcrumb-item>资源链接</el-breadcrumb-item>
+      </el-breadcrumb>
 
-
-        </el-form-item> -->
-
-          <el-form-item  label="备注">
-            <el-input type="text" v-model="search_data.content"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" size="small" icon="search" @click="handleSearch2()">搜索</el-button>
-          </el-form-item>
-
-        <el-form-item class="btnRight">
-          <el-button type="primary" size="small"  @click="handleAdd()">添加</el-button>
-        </el-form-item>
-      </el-form>
     </div>
     <el-table :data="nowTableData" style="width: 100%">
       <el-table-column label="序号" width="100">
@@ -38,12 +21,7 @@
           <span>{{ scope.row.project_name }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="价格">
-        <template slot-scope="scope">
-          <!-- <i class="el-icon-time"></i> -->
-          <span>¥{{ scope.row.project_price }}</span>
-        </template>
-      </el-table-column>
+
       <el-table-column label="介绍">
         <template slot-scope="scope">
           <span>{{ scope.row.project_introduce }}</span>
@@ -61,8 +39,13 @@
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+
+          <div v-if="scope.row.rs_status==0">
+             <el-button  size="mini" @click="handleEdit(scope.$index, scope.row)">回复</el-button>
+              <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">取消</el-button>
+            </div>
+            <el-button disabled v-else  size="mini" @click="handleEdit(scope.$index, scope.row)">已完成</el-button>
+         
         </template>
       </el-table-column>
     </el-table>
@@ -85,10 +68,6 @@ export default {
   name: "adminIndex",
     data() {
     return {
-      search_data: {
-
-        content:""
-      },
       tableData:[],
       currentPage : 1,
       pageSize : 3,
@@ -115,7 +94,7 @@ export default {
       console.log(index, row);
       this.dialog = {
         show: true,
-        title: "修改项目",
+        title: "资源",
         option: "edit"
       };
       this.formData = {
@@ -132,13 +111,13 @@ export default {
       var params = new URLSearchParams();
       params.append("id",row.project_id);
       this.axios
-        .post("/personCustom_api/personDelete.php", params)
+        .post("/personCustom_api/PersonTp5/public/admin/bs/resource_edit_cancel", params)
         .then(res => {
           var state = res.data.stauts;
           console.log(res);
           if (state === "ok") {
             this.$message({
-              message: "删除成功",
+              message: "已取消，无法回答",
               type: "success"
             });
             this.getPerson();
@@ -146,15 +125,13 @@ export default {
         });
     },
     getPerson() {
-      this.axios.get("/personCustom_api/personSelect.php").then(res => {
+      this.axios.get("/personCustom_api/PersonTp5/public/admin/bs/resource_select").then(res => {
         console.log(res);
-        var msg = res.data.msg;
-        if (msg === "ok") {
-          this.tableData = res.data.data.personSelect;
+          this.tableData = res.data.data;
           console.log(this.tableData);
           // this.filterTableData= res.data.data.product;
           // this.setPageinations();
-        }
+        
       });
       // console.log('asds');
     },
@@ -195,7 +172,7 @@ export default {
 </script>
 <style scoped lang="less">
 .aa{
-  padding: 15px 20px 0px 0px;
+  padding: 1rem;
   // border: 1px solid red;
 }
 .page{

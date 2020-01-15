@@ -1,7 +1,7 @@
 <template>
   <el-header>
     <el-row type="flex">
-      <el-col :lg="10" class="hidden-xs-only">
+      <el-col :md="10" class="hidden-xs-only">
         <div class="grid-content headwidth">
           <router-link class="headspan" to="/index">
             <i class="iconfont icon-icon_huabanfuben"></i>
@@ -14,7 +14,7 @@
           <router-link class="headspan" to="/Market">论坛</router-link>
         </div>
       </el-col>
-      <el-col :lg="14" class="hidden-xs-only">
+      <el-col :md="14" class="hidden-xs-only">
         <div class="grid-content headwidth1" v-if="$store.state.user.nickname==''">
           <router-link to="/login" class="headspan">请登录&nbsp;</router-link>
           <router-link to="/register" class="headspan">免费注册</router-link>
