@@ -32,12 +32,21 @@
     </el-row>
       <el-row>
       <el-col>
-       <el-collapse >
-  <el-collapse-item v-for="item in questions" :key="item.question_id" :title="item.question_content" :name="item.question_id">
+              <span class="question1">问题汇总</span>
+
+
+      </el-col>
+       </el-row>
+
+      <el-row>
+      <el-col>
+        <div >       <el-collapse  >
+  <el-collapse-item  class="fontsize" v-for="item in questions" :key="item.question_id" :title="item.question_content" :name="item.question_id">
     <div>{{item.solve_content1}}</div>
   </el-collapse-item>
 
-</el-collapse>
+</el-collapse></div>
+
       </el-col>
        </el-row>
   </div>
@@ -100,11 +109,32 @@ export default {
 };
 </script>
 <style scoped lang="less">
+.el-collapse-item__header{
+  font-size: 20px;
+}
+@media (max-width: 700px) {
+.el-row{
+      width: 90%;
+    margin: 0 auto;
+}
+}
+@media (min-width: 1000px) {
+  .el-row{
+      width: 60%;
+    margin: 0 auto;
+}
+}
+      .question1 {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: bolder;
+        color: #ba55d3;
+        padding-top:3rem;
+        padding-bottom: 1rem;
+      }
 .contaniner {
   padding-top: 1.5rem;
   .el-row {
-    width: 85%;
-    margin: 0 auto;
     .contaniner1 {
 
       .carousel{

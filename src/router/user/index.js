@@ -71,7 +71,7 @@ export default {
         component: Video
     },    
     {
-        path: 'Video_detail',
+        path: 'Video_detail/:id/:sort',
         component: Video_detail
     }
     ,    

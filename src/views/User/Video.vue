@@ -11,48 +11,33 @@
         </div>
       </el-col>
     </el-row>
-    <el-row class="row-mobile">
+    <el-row class="row-mobile1">
       <el-col :xs="24" :lg="8">
         <div class="col_center1">
-          <el-radio-group v-model="tabPosition" style="margin-bottom: 30px;margin-top:20px;">
-            <el-radio-button label="top">top</el-radio-button>
-            <el-radio-button label="right">right</el-radio-button>
-            <el-radio-button label="bottom">bottom</el-radio-button>
-            <el-radio-button label="left">left</el-radio-button>
+          <el-radio-group @change="search()" v-model="tabPosition" style="margin-bottom: 30px;margin-top:20px;">
+            <el-radio-button label="计算机">计算机</el-radio-button>
+            <el-radio-button label="高数">高数</el-radio-button>
+            <el-radio-button label="英语">英语</el-radio-button>
+            <el-radio-button label="娱乐">娱乐</el-radio-button>
+            <el-radio-button label="全部" aria-checked>全部</el-radio-button>
           </el-radio-group>
         </div>
       </el-col>
     </el-row>
     <el-divider></el-divider>
     <el-row class="row-content row-mobile">
-      <el-col :xs="24" :lg="6">
-    
-        <div class="box"  @click="ToDetail()">
- 
-            <img class="video-img" src="http://47.96.175.28/personCustom_api/images/user/index/l1.jpg" alt="">
-            <span> 打算科技爱丽打算科技爱丽打算科技爱丽</span>
-            <br>
-            <span>saf</span>&nbsp;&nbsp;<span>saf</span>
-
-        </div>
-      </el-col>
-
-            <el-col :xs="24" :lg="6">
-        <div class="box">
-            
-            <img class="video-img" src="http://47.96.175.28/shopping_api/images/photo/jujingyi.jpeg" alt="">
-                   <span> 打算科技爱丽</span>
-            </div>
-      </el-col>
-            <!-- <el-col :xs="24" :lg="6">
-        <div class="box">123</div>
-      </el-col>
-            <el-col :xs="24" :lg="6">
-        <div class="box">123</div>
-      </el-col>
-            <el-col :xs="24" :lg="6">
-        <div class="box">123</div>
-      </el-col> -->
+      <div>
+        <el-col  v-for="item in data" :key="item.video_id" :xs="12" :md="6">
+          <div class="box"  @click="ToDetail(item.video_id,item.video_type_id)">
+              <img class="video-img" :src="item.video_pic" alt="">
+              <div class="width"><span>{{item.video_name}}</span></div>
+              <div class="width">
+              <!-- <span>{{item.video_name}}</span> -->
+              <span>播放量：{{item.video_number}}</span>
+              </div>
+          </div>
+        </el-col>
+      </div>
     </el-row>
   </div>
 </template>
@@ -64,15 +49,18 @@ export default {
       data: [],
       input: "",
       type: [],
-      tabPosition: ""
+      tabPosition: "1"
     };
   },
   components: { Logo },
 
   methods: {
+    sort(){
+     console.log(this.tabPosition);
+    },
     product_show() {
       this.axios
-        .get("/personCustom_api/PersonTp5/public/admin/index/product_show")
+        .get("/personCustom_api/PersonTp5/public/index/bs/video_select")
         .then(res => {
           // console.log(res);
           this.data = res.data.data;
@@ -80,23 +68,35 @@ export default {
         });
     },
     search() {
+
+                var params = new URLSearchParams();
+          params.append("sort", this.tabPosition);
+          params.append("input", this.input);
+          console.log(this.tabPosition);
       this.axios
-        .get(
-          "/personCustom_api/PersonTp5/public/admin/index/product_show?id=" +
-            this.input
+        .post(
+          "/personCustom_api/PersonTp5/public/index/bs/video_search",params
         )
         .then(res => {
-          // console.log(res);
+          console.log(res);
           this.data = res.data.data;
-          console.log(this.data);
+          // console.log(this.data);
         });
     },
     sumbit() {
       this.$router.push("/Qualifications");
     },
-    ToDetail(){
-        console.log('asdsd');
-         this.$router.push("/Video_detail");     
+    ToDetail(id,sort){
+ this.axios
+        .get("/personCustom_api/PersonTp5/public/index/bs/video_number?id="+id)
+        .then(res => {
+          // console.log(res);
+          // this.data = res.data.data;
+          // console.log(this.data);
+        });
+
+
+         this.$router.push("/Video_detail/"+id+"/"+sort);     
     }
   },
   mounted() {
@@ -106,6 +106,33 @@ export default {
 </script>
 <style scoped lang="less">
 
+@media (max-width: 700px) {
+.width{
+width:100%;
+padding: 0.25rem;
+text-align: center;
+}
+      img{
+          width: 90%;
+        padding-right: 5px;
+          height: 100px;
+      }
+}
+@media (min-width: 1000px) {
+.width{
+width:100%;
+padding: 0.25rem;
+}
+      img{
+        //   width: 50%;
+        padding-right: 5px;
+          height: 100px;
+      }
+}
+
+.row-mobile1{
+      width:90%;
+}
 .el-row {
   margin: 0 auto;
   display: flex;
@@ -116,21 +143,20 @@ export default {
     display: flex;
     // border: 1px red solid;
     .box {
-      border: 1px red solid;
-    padding-bottom: 20px;
-    padding-right: 20px;
+      // border: 1px red solid;
+      border: 0.25rem;
+      padding-bottom: 20px;
+      padding-right: 20px;
       display: flex;
-         flex-wrap: wrap;
+      flex-wrap: wrap;
+      justify-content: center;
       align-items: flex-start;
       width: 100%;
-      img{
-        //   width: 50%;
-        padding-right: 5px;
-          height: 100px;
-      }
+
     }
     .col_center1 {
       display: flex;
+      
       width: 100%;
       justify-content: center;
       height: 100%;

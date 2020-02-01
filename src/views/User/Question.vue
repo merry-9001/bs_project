@@ -6,24 +6,14 @@
     <div class="table">
       <el-form ref="form" :model="form" label-width="100px">
 
-        <el-form-item label="疑问类别">
-          <el-select v-model="form.type" placeholder="请选择类别">
-            <el-option v-for="item in type" :key="item.question_type_id" 
-            :label="item.question_type_nane" :value="item.question_type_id"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="关键字">
-          <el-input v-model="form.key"></el-input>
-        </el-form-item>
-        <el-form-item label="悬赏金额">
-          <el-input v-model="form.price"></el-input>
+        <el-form-item  label="所需积分">
+          <el-input disabled v-model="form.price"></el-input>
         </el-form-item>
         <el-form-item label="问题及简介" >
           <el-input type="textarea" v-model="form.desc"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">提问</el-button>
-          <!-- <el-button>取消</el-button> -->
         </el-form-item>
       </el-form>
     </div>
@@ -36,24 +26,13 @@ export default {
   data() {
     return {
       form: {
-        type: "",
-        key: "",
         desc: "",
-        price:""
+        price:100
       },
       type:[],
     };
   },
   components: { Logo },
-  mounted(){
-    this.axios.get("/personCustom_api/PersonTp5/public/admin/index/question")
-    .then(res=>{
-      // console.log(res);
-      this.type=res.data.data;
-      // console.log(this.type);
-    })
-
-  },
 
   methods:{
       onSubmit(){
@@ -63,12 +42,10 @@ export default {
         // console.log(this.form.price);
         var params=new URLSearchParams();
         params.append("username",this.$store.state.user.username);
-        params.append("question_type_id", this.form.type);
         params.append("question_content", this.form.desc);
-        params.append("question_key", this.form.key);
         params.append("question_price", this.form.price);
         // params.append("sum", this.sum);
-    this.axios.post("/personCustom_api/PersonTp5/public/admin/index/question_sumbit",params)
+    this.axios.post("/personCustom_api/PersonTp5/public/admin/bs/question_user_sumbit",params)
     .then(res=>{
       console.log(res);
       // this.type=res.data.data;

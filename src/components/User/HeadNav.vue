@@ -82,9 +82,10 @@
           <el-col :xs="24" :class="menuview">
             
             <ul v-if="buttion_flag==1">
-    <router-link tag="li" class="headspan" to="/Product">商品介绍&nbsp;</router-link>
-              <li>wads</li>
-              <li>wads</li>
+    <router-link tag="li" class="headspan" to="/Resources">资源（电影链接）&nbsp;</router-link>
+    <router-link tag="li" class="headspan" to="/Product">提问回答&nbsp;</router-link>
+    <router-link tag="li" class="headspan" to="/Market">交易市场&nbsp;</router-link>
+    <router-link tag="li" class="headspan" to="/Video">视频&nbsp;</router-link>
             </ul>
             <ul v-else>
               <li>sa</li>

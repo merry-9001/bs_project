@@ -25,7 +25,7 @@
           <div style="padding: 14px;">
             <span class="price">{{item.project_name}}</span>
             <div>
-              <span class="price">¥{{item.project_price}}起</span>
+              <span class="price">¥{{item.project_price}}</span>
               <span class="price">共有{{item.project_num}}人付款</span>
               <el-button type="primary" plain  @click="ToDetail(item.project_id)">购买</el-button>
             </div>

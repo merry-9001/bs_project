@@ -13,7 +13,7 @@ body,
 }
 @media (max-width: 700px) {
   body {
-    font-size: 20px;
+    font-size: 18px;
     // background-color: #bfa;
   }
   .carousel {

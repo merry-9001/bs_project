@@ -19,7 +19,7 @@ import 'video.js/dist/video-js.css'
 
 Vue.prototype.$video = Video
 
-
+window.router=router;
 Vue.use(ElementUI);
 Vue.config.productionTip = false
 Vue.prototype.axios = axios;

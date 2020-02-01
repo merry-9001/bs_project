@@ -54,7 +54,7 @@ export default {
   methods: {
     product_show() {
       this.axios
-        .get("/personCustom_api/PersonTp5/public/admin/bs/resource_select")
+        .get("/personCustom_api/PersonTp5/public/index/bs/resource_select")
         .then(res => {
           // console.log(res);
           this.data = res.data.data;
@@ -67,7 +67,7 @@ export default {
     search() {
       this.axios
         .get(
-          "/personCustom_api/PersonTp5/public/admin/index/product_show?id=" +
+          "/personCustom_api/PersonTp5/public/index/index/product_show?id=" +
             this.input
         )
         .then(res => {

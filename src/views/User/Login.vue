@@ -141,7 +141,7 @@ export default {
             localStorage.setItem("username",res.data.data.username);
             this.$store.commit("user/NAME", {
                 nickname: res.data.data.nickname,
-                 username: res.data.data.username,
+                username: res.data.data.username,
                 headphoto:res.data.data.photo,
                 // userHead:res.data.data.src
               });
