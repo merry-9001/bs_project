@@ -45,7 +45,7 @@ export default {
         params.append("question_content", this.form.desc);
         params.append("question_price", this.form.price);
         // params.append("sum", this.sum);
-    this.axios.post("/personCustom_api/PersonTp5/public/admin/bs/question_user_sumbit",params)
+    this.axios.post("/personCustom_api/PersonTp5/public/index/bs/question_user_sumbit",params)
     .then(res=>{
       console.log(res);
       // this.type=res.data.data;

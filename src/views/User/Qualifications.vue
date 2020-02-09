@@ -89,7 +89,7 @@ export default {
           console.log(this.sizeForm);
         this.axios
           .post(
-            "/personCustom_api/PersonTp5/public/admin/bs/resource_sumbit",
+            "/personCustom_api/PersonTp5/public/index/bs/resource_sumbit",
             params
           )
           .then(res => {
@@ -136,7 +136,7 @@ export default {
   },
   mounted() {
     this.axios
-      .get("/personCustom_api/PersonTp5/public/admin/index/apply_type")
+      .get("/personCustom_api/PersonTp5/public/index/bs/apply_type")
       .then(res => {
         // console.log(res);
         this.type = res.data.data;

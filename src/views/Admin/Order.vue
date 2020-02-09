@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     
-<el-table :data="tableData" style="width: 100%">
+  <el-table :data="tableData" style="width: 100%">
       <el-table-column label="序号" >
         <template slot-scope="scope">
     

@@ -33,7 +33,7 @@ export default {
         component: Index
     },
     {
-        path: 'detail/1/:id',
+        path: 'detail/:id',
         component: Detail
     },
     {

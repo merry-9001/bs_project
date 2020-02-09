@@ -10,28 +10,28 @@
         </div>
       </el-col>
 
-      <el-col  :xs="24"  :md="6">
-        <div class="col_center1">
-          <el-input placeholder="搜索" v-model="input" clearable maxlength="10" width="100"></el-input>
-          <el-button @click="search()" icon="el-icon-search"></el-button>
-        </div>
-      </el-col>
     </el-row>
 
-    <el-row>
-      <el-col :xs="24" :md="6" v-for="item in data" :key="item.project_id">
+    <el-row >
+      <div v-for="item in data_name" :key="item.username" class="pro_flex">
+      <div v-show="item.username!=$store.state.user.username" class="username">  <h1>{{item.username}}的店铺</h1></div>
+      <div v-for="(items,index) in data_pro" :key="index" >
+
+           <div v-show="item.username==items.username && item.username!=$store.state.user.username" class="content" >
+    
         <el-card shadow>
-          <img :src="item.project_src" class="image" />
+          <img :src="items.project_src" class="image" />
           <div style="padding: 14px;">
-            <span class="price">{{item.project_name}}</span>
+            <span class="price">{{items.project_name}}</span>
             <div>
-              <span class="price">¥{{item.project_price}}</span>
-              <span class="price">共有{{item.project_num}}人付款</span>
-              <el-button type="primary" plain  @click="ToDetail(item.project_id)">购买</el-button>
+              <span class="price">¥{{items.project_price}}</span>
+              <el-button type="primary" plain  @click="ToDetail(items.project_id)">详细</el-button>
             </div>
           </div>
         </el-card>
-      </el-col>
+           </div>
+      </div>
+      </div>
     </el-row>
   </div>
 </template>
@@ -40,7 +40,8 @@ import Logo from "@/components/User/Logo.vue";
 export default {
   data() {
     return {
-      data: [],
+      data_name: [],
+      data_pro: [],
       input: "",
       type: []
     };
@@ -50,15 +51,16 @@ export default {
   methods: {
     product_show() {
       this.axios
-        .get("/personCustom_api/PersonTp5/public/admin/index/product_show")
+        .get("/personCustom_api/PersonTp5/public/index/bs/product_show")
         .then(res => {
           // console.log(res);
-          this.data = res.data.data;
-          console.log(this.data);
+          this.data_pro = res.data.data;
+          this.data_name = res.data.data1;
+          console.log(this.data_name );
         });
     },
     ToDetail(id) {
-      this.$router.push("/detail/1/" + id);
+      this.$router.push("/detail/" + id);
     },
     search() {
       this.axios
@@ -72,9 +74,6 @@ export default {
           console.log(this.data);
         });
     },
-    sumbit(){
-        this.$router.push("/Qualifications");      
-    }
   },
   mounted() {
     this.product_show();
@@ -82,6 +81,22 @@ export default {
 };
 </script>
 <style scoped lang="less">
+.content{
+  padding:0.2rem;
+}
+.username{
+  width: 100%;
+}
+.yu{
+  //  border: 1px red solid;
+}
+.pro_flex{
+  // border: 1px red solid;
+    // width:80%;
+  // margin:0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
 .el-row{
   width:80%;
   margin:0 auto;

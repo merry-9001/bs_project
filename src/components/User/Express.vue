@@ -1,7 +1,7 @@
 
 
 <template>
-  <el-dialog title="请填写" :visible.sync="dialog.show" width="30%">
+  <el-dialog title="请填写" :visible.sync="dialog22.show" width="30%">
     <span>请填写收货人姓名</span>
     <el-input type="text" v-model="apprise_name"></el-input>
         <span>请填写收货人电话</span>
@@ -9,7 +9,7 @@
         <span>请填写收货人地址</span>
     <el-input type="text" v-model="apprise_address"></el-input>
     <span slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="onSubmit(dialog.order_id)">确 定</el-button>
+      <el-button type="primary" @click="onSubmit(dialog22.order_id)">确 定</el-button>
     </span>
   </el-dialog>
 </template>
@@ -30,7 +30,7 @@ export default {
       // data={
       //   'getPerson':order_id
       // };
-      this.dialog.show = false;
+      this.dialog22.show = false;
       this.$emit(
         "update",
         order_id,
@@ -44,7 +44,7 @@ export default {
     }
   },
   props: {
-    dialog: Object
+    dialog22: Object
   }
 };
 </script>

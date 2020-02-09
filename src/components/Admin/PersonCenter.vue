@@ -111,7 +111,7 @@ export default {
       var params = new URLSearchParams();
       params.append("id",row.project_id);
       this.axios
-        .post("/personCustom_api/PersonTp5/public/admin/bs/resource_edit_cancel", params)
+        .post("/personCustom_api/PersonTp5/public/index/bs/resource_edit_cancel", params)
         .then(res => {
           var state = res.data.stauts;
           console.log(res);
@@ -125,7 +125,7 @@ export default {
         });
     },
     getPerson() {
-      this.axios.get("/personCustom_api/PersonTp5/public/admin/bs/resource_select").then(res => {
+      this.axios.get("/personCustom_api/PersonTp5/public/index/bs/resource_select").then(res => {
         console.log(res);
           this.tableData = res.data.data;
           console.log(this.tableData);

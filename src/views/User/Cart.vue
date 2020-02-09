@@ -24,33 +24,23 @@
                   <el-form-item label="项目备注">
                     <span>{{ props.row.project_remake }}</span>
                   </el-form-item>
-
-                  <el-form-item label="已付款人数">
-                    <span>{{ props.row.project_num }}</span>
-                  </el-form-item>
-
-                  <el-form-item label="起始价格">
+                  <el-form-item label="价格">
                     <span>{{ props.row.project_price }}</span>
                   </el-form-item>
                 </el-form>
               </template>
             </el-table-column>
-
             <el-table-column type="selection" width="55"></el-table-column>
-
             <el-table-column label="图片" width="200">
               <template slot-scope="scope">
                 <img :src="scope.row.project_src " class="img" />
               </template>
             </el-table-column>
-
-            <el-table-column prop="project_name" label="项目名" width="150">
+            <el-table-column prop="project_name" label="商品" width="150">
               <!-- <template slot-scope="scope">{{ scope.row.date }}</template> -->
             </el-table-column>
-
-            <el-table-column prop="project_product_price" label="最终价格" width="150"></el-table-column>
-            <el-table-column prop="project_product_remake" label="备注"></el-table-column>
-
+            <el-table-column prop="project_price" label="最终价格" width="150"></el-table-column>
+            <el-table-column prop="project_remake" label="备注"></el-table-column>
             <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
@@ -61,10 +51,7 @@
     </el-table-column>
           </el-table>
           <div class="pay">
-            <!-- <el-button @click="toggleSelection([tableData[1], tableData[2]])">切换第二、第三行的选中状态</el-button>
-            <el-button @click="toggleSelection()">取消选择</el-button>-->
             <span>¥{{sum}} &nbsp;&nbsp;</span>
-            
             <el-button @click="speedupData()">付款</el-button>
           </div>
         </div>
@@ -88,15 +75,7 @@ export default {
     this.renderData();
   },
   methods: {
-    toggleSelection(rows) {
-      if (rows) {
-        rows.forEach(row => {
-          this.$refs.multipleTable.toggleRowSelection(row);
-        });
-      } else {
-        this.$refs.multipleTable.clearSelection();
-      }
-    },
+
     handleSelectionChange(val) {
               // this.$refs.multipleTable.clearSelection();
       this.multipleSelection = val;
@@ -106,7 +85,7 @@ export default {
       let multis = [];
       this.sum=0;
       for (var i = 0; i < arr.length; i++) {
-        this.sum=this.sum+arr[i].project_product_price;
+        this.sum=this.sum+arr[i].project_price;
         // console.log(arr[i]);
         // console.log(this.sum);
       }
@@ -115,24 +94,22 @@ export default {
       var arr = this.multipleSelection;
       let multis = [];
       let proId = [];
-      let remake=[];
-      let person_price=[];
+      let seller = [];
       for (var i = 0; i < arr.length; i++) {
         multis.push(arr[i].cart_id);
         proId.push(arr[i].project_id);
-        remake.push(arr[i].project_product_remake);
-        person_price.push(arr[i].project_product_price);
+        seller.push(arr[i].username);
       }
+      // console.log(multis);
       var params=new URLSearchParams();
-      params.append("remake", remake);
-      params.append("person_price", person_price);
-      params.append("arrayData", multis);
+      params.append("seller", seller);
+      params.append("cart", multis);
       params.append("proId", proId);
       params.append("sum", this.sum);
       params.append("username", this.$store.state.user.username);
-      this.axios.post("/personCustom_api/PersonTp5/public/admin/index/cart_submit",params)
+      this.axios.post("/personCustom_api/PersonTp5/public/index/bs/cart_submit",params)
       .then(res=>{
-        // console.log(res);
+        console.log(res);
         //     this.renderData();
          this.$router.push('/order');
       })
@@ -146,7 +123,7 @@ export default {
         var params = new URLSearchParams();
         params.append("username", this.$store.state.user.username);
         params.append("cart_id", row.cart_id);
-        this.axios.post("/personCustom_api/PersonTp5/public/admin/index/cart_delete",params).
+        this.axios.post("/personCustom_api/PersonTp5/public/index/bs/cart_delete",params).
         then(res=>{
           console.log(res);
         });
@@ -158,7 +135,7 @@ export default {
     var params = new URLSearchParams();
     params.append("username", this.$store.state.user.username);
     this.axios
-      .post("/personCustom_api/PersonTp5/public/admin/index/cart", params)
+      .post("/personCustom_api/PersonTp5/public/index/bs/cart", params)
       .then(res => {
         console.log(res);
         this.tableData = res.data.data.cart;

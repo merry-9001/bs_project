@@ -84,7 +84,7 @@ export default {
       params.append("project_id", this.formData.project_id);
       console.log(this.formData.project_id);
        console.log(this.content);
-          this.axios.post("/personCustom_api/PersonTp5/public/admin/bs/resource_edit", params).then(res => {
+          this.axios.post("/personCustom_api/PersonTp5/public/index/bs/resource_edit", params).then(res => {
           console.log(res);
           this.content="";
           var stauts = res.data.msg;

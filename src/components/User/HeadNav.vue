@@ -33,7 +33,7 @@
           <router-link to="/order" class="headspan">&nbsp;&nbsp;我的中心</router-link> -->
     <el-dropdown  class="down" trigger="click">
       <span class="el-dropdown-link">
-        {{$store.state.user.nickname}}<i class="el-icon-arrow-down el-icon--right"></i>
+        {{$store.state.user.username}}<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu   slot="dropdown">
        
