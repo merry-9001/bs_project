@@ -13,12 +13,27 @@ import Market from '@/views/User/Market.vue'
 import Video from '@/views/User/Video.vue'
 import Video_detail from '@/views/User/Video_detail.vue'
 import Person from '@/views/User/Person.vue'
+import Money from '@/views/User/Money.vue'
+import Express from '@/views/User/Express_select.vue'
+import UploadVideo from '@/views/User/UploadVideo.vue'
 export default {
     path: '/',
     component: Home,
     children: [{
         path: '/',
         component: Index
+    },
+    {
+        path: 'UploadVideo',
+        component: UploadVideo
+    },
+    {
+        path: 'express',
+        component: Express
+    },
+    {
+        path: 'money',
+        component: Money
     },
     {
         path: 'login',

@@ -22,6 +22,14 @@
           ></el-input>
         </el-form-item>
        
+          <el-form-item label="附件:">
+            <input type="file" name="file" value="上传图片" @change="handleToUpload" />
+          </el-form-item>
+
+          <!-- <el-form-item label="图片:">
+            <input type="file" name="file" value="上传图片" @change="handleToUpload11" />
+          </el-form-item> -->
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialog.show = false">取 消</el-button>
@@ -63,17 +71,41 @@ export default {
       };
       //   console.log('asddas');
       this.axios
-        .post("/personCustom_api/picUpload.php", param, config)
+        .post("/personCustom_api/wordUpload.php", param, config)
         .then(res => {
           //   console.log(res);
           var stauts = res.data.stauts;
 
           if (stauts === "ok") {
             this.msg = res.data.address;
-            this.$emit("func", this.msg);
+            // this.$emit("func", this.msg);
 
             // console.log(this.msg);
           }
+        });
+    },
+        handleToUpload11(ev) {
+      var file = ev.target.files[0];
+      var param = new FormData();
+      param.append("file", file, file.name);
+      var config = {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      };
+      //   console.log('asddas');
+      this.axios
+        .post("/personCustom_api/vidoUpload.php", param, config)
+        .then(res => {
+            console.log(res);
+          // var stauts = res.data.stauts;
+
+          // if (stauts === "ok") {
+          //   this.msg = res.data.address;
+            // this.$emit("func", this.msg);
+
+            // console.log(this.msg);
+          // }
         });
     },
     onSubmit() {
@@ -82,6 +114,7 @@ export default {
       var params = new URLSearchParams();
       params.append("project_remake", this.content);
       params.append("project_id", this.formData.project_id);
+      params.append("url", 'http://localhost:8000/personCustom_api/images/admin/person/'+this.msg);
       console.log(this.formData.project_id);
        console.log(this.content);
           this.axios.post("/personCustom_api/PersonTp5/public/index/bs/resource_edit", params).then(res => {

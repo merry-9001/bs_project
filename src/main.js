@@ -19,6 +19,11 @@ import 'video.js/dist/video-js.css'
 
 Vue.prototype.$video = Video
 
+import echarts from 'echarts'
+ 
+Vue.prototype.$echarts = echarts
+
+
 window.router=router;
 Vue.use(ElementUI);
 Vue.config.productionTip = false

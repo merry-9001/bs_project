@@ -1,18 +1,17 @@
 <template>
   <div class="contaniner-whole">
     <div class="div_img">
-      <img src="http://47.96.175.28/personCustom_api/images/user/index/l1.jpg" class="img-size" />
+      <img src="http://localhost:8000/personCustom_api/images/user/index/l1.jpg" class="img-size" />
     </div>
     <div>
+
+      
       <el-row>
         <el-col>
           <div class="col_center1">服务介绍</div>
           <span class="word">
             主要为了服务在校的大学生。
-            大学生在校园生活中，经常会遇到取快递或者外卖的情况，
-            却因某些原因不能亲自前往，同时，宿舍囤积了许多买回来只用几次但又弃之可惜的物品。
-            同时网站拥有朋友圈和交流学习的地方，方便学生之间交流。
-            这是一个一个全面、互动性高的综合性交易平台。
+            大学生在校园生活中，经常会遇到很多生活上的问题，大家可以在网站上一起交流，可以买卖一些自己的闲置商品，也可以在视频中心学习和娱乐，在网站一切都由用户主导，主动请求资源，提出问题，买卖商品，快递查询等。
           </span>
           <el-divider></el-divider>
         </el-col>
@@ -39,6 +38,7 @@
           </div>
         </el-col>
       </el-row>
+      <!-- asjdklasjdl -->
     </div>
   </div>
 </template>
@@ -51,6 +51,15 @@ export default {
     };
   },
   mounted() {
+    // this.axios
+    //   .get("/personCustom_api/PersonTp5/public/index/bs/yu")
+    //   .then(res => {
+    //     console.log(res);
+    //     this.personData = res.data.data;
+    //     console.log(this.personData);
+    //   });
+
+
     this.axios
       .get("/personCustom_api/PersonTp5/public/index/bs/project_type")
       .then(res => {

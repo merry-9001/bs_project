@@ -1,8 +1,5 @@
 import axios from 'axios';
-
-
 import { Message, Loading } from 'element-ui';
-
 let loading; //定义loading变量
 function startLoading() { //使用Element loading-start 方法
     loading = Loading.service({

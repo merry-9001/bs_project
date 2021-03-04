@@ -4,6 +4,10 @@
       <span slot="name">购物车</span>
     </Logo>
     <el-row>
+<transition name="el-zoom-in-top">
+<div v-show="show">
+
+
       <el-col>
         <div class="table_con">
           <el-table
@@ -52,10 +56,14 @@
           </el-table>
           <div class="pay">
             <span>¥{{sum}} &nbsp;&nbsp;</span>
-            <el-button @click="speedupData()">付款</el-button>
+            <el-button @click="speedupData()">下单</el-button>
           </div>
         </div>
       </el-col>
+
+</div>
+</transition>
+
     </el-row>
   </div>
 </template>
@@ -68,11 +76,13 @@ export default {
     return {
       tableData: [],
       multipleSelection: [],
-      sum:0
+      sum:0,
+            show:false,
     };
   },
   mounted() {
     this.renderData();
+           this.show=true;
   },
   methods: {
 

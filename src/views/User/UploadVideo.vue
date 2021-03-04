@@ -5,22 +5,27 @@
     </Logo>
     <div class="contaniner_table-qualification">
       <el-form ref="form" :model="sizeForm" label-width="80px" :rules="rules">
-        <el-form-item label="资源名" class="input_width" prop="name">
-          <el-input v-model="sizeForm.name" width="200"></el-input>
+        <el-form-item label="视频名" class="input_width" prop="name" width="100">
+          <el-input v-model="sizeForm.name" ></el-input>
         </el-form-item>
-
-        <el-form-item label="简单介绍" class="input_width">
-          <el-input type="textarea" placeholder="请输入内容" v-model="sizeForm.person"></el-input>
-        </el-form-item>
-
-
+          <el-form-item label="类型:">
+            <el-radio v-model="radio" label="计算机">计算机</el-radio>
+            <el-radio v-model="radio" label="英语">英语</el-radio>
+            <el-radio v-model="radio" label="高数">高数</el-radio>
+            <el-radio v-model="radio" label="娱乐">娱乐</el-radio>
+          </el-form-item>
           <el-form-item label="图片:">
             <input class="src_img" type="file" name="file" value="上传图片" @change="handleToUpload" />
             <img :src="sizeForm.src" class="head" />
           </el-form-item>
 
+          <el-form-item label="视频:">
+            <input class="src_img" type="file" name="file" value="上传视频" @change="handleToUpload11" />
+            <!-- <img :src="sizeForm.src" class="head" /> -->
+          </el-form-item>
+
         <el-form-item label prop="info">
-          <el-switch v-model="sizeForm.delivery"></el-switch>确认此资源未在资源库
+          <el-switch v-model="sizeForm.delivery"></el-switch>确认视频内容健康、绿色
         </el-form-item>
         <el-form-item size="large">
           <el-button type="primary" @click="onSubmit('form')">提交</el-button>
@@ -35,6 +40,7 @@ import Logo from "@/components/User/Logo.vue";
 export default {
   components: { Logo },
   data() {
+
     var info = (rule, value, callback) => {
       if (this.sizeForm.delivery ==false) {
         callback(new Error('请勾选'));
@@ -46,10 +52,13 @@ export default {
     };
 
     return {
+      radio: '计算机',
       sizeForm: {
+        url:"",
         name: "",
         person: "",
-        src:""
+        src:"",
+        tabPosition:''
       },
       type: [],
       rules: {
@@ -83,13 +92,13 @@ export default {
         if (valid) {
         var params = new URLSearchParams();
         params.append("name", this.sizeForm.name);
-        params.append("introduce", this.sizeForm.person);
-        params.append("username", this.$store.state.user.username);
+        params.append("radio", this.radio);
+        params.append("url", this.sizeForm.url);
         params.append("src", this.sizeForm.src);
           console.log(this.sizeForm);
         this.axios
           .post(
-            "/personCustom_api/PersonTp5/public/index/bs/resource_sumbit",
+            "/personCustom_api/PersonTp5/public/index/bs/video_user_sumbit",
             params
           )
           .then(res => {
@@ -97,11 +106,11 @@ export default {
 
               this.$notify({
                 title: "申请",
-                message: "您的申请已发送，请耐心等待回复",
+                message: "上传成功",
                 duration: 0,
                 type: "success"
               });
-              this.$router.push("/Resources");
+              this.$router.push("/Video");
 
           });
         }
@@ -133,6 +142,33 @@ export default {
          }
       });
     },
+   handleToUpload11(ev) {
+      var file = ev.target.files[0];
+      var param = new FormData();
+      param.append("file", file, file.name);
+      var config = {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      };
+      //   console.log('asddas');
+      this.axios
+        .post("/personCustom_api/vidoUpload.php", param, config)
+        .then(res => {
+            // console.log(res);
+             this.sizeForm.url='http://localhost:8000/personCustom_api/images/admin/person/'+res.data.address;
+          // var stauts = res.data.stauts;
+
+          // if (stauts === "ok") {
+          //   this.msg = res.data.address;
+            // this.$emit("func", this.msg);
+
+            // console.log(this.msg);
+          // }
+        });
+    },
+
+
   },
   mounted() {
     // this.axios

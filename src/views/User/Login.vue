@@ -6,7 +6,6 @@
       </el-col>
       <el-col :span="12">
         <div class="login_table">
-
             <span>欢迎登陆</span>
             <el-form :label-position="labelPosition" label-width="80px" 
             :model="formLabelAlign"
@@ -122,19 +121,20 @@ export default {
           {
             var state=res.data.msg;
             console.log(res);
-            if(state==="ok")
-            {
-              localStorage.setItem("flag", this.formLabelAlign.name);
-              localStorage.setItem("isAdmin", this.formLabelAlign.type);
-              this.$store.commit("admin/ADMIN_NAME", {
-                adminName: this.formLabelAlign.name,
-                isAdmin: this.formLabelAlign.type,
-                // userHead:res.data.data.src
-              });
-              // console.log(this.formLabelAlign.type);
-              this.$router.push("/admin/index");
-            }
-            else if(state==="okok")
+            // if(state==="ok")
+            // {
+            //   localStorage.setItem("flag", this.formLabelAlign.name);
+            //   localStorage.setItem("isAdmin", this.formLabelAlign.type);
+            //   this.$store.commit("admin/ADMIN_NAME", {
+            //     adminName: this.formLabelAlign.name,
+            //     isAdmin: this.formLabelAlign.type,
+            //     // userHead:res.data.data.src
+            //   });
+            //   // console.log(this.formLabelAlign.type);
+            //   this.$router.push("/admin/index");
+            // }
+            // else
+          if(state==="okok")
           {
             localStorage.setItem("nickname",res.data.data.nickname);
             localStorage.setItem("headphoto",res.data.data.photo);
@@ -145,8 +145,15 @@ export default {
                 headphoto:res.data.data.photo,
                 // userHead:res.data.data.src
               });
-            // console.log(res.data.data.nickname);
+
+          var params = new URLSearchParams();
+          params.append("username", res.data.data.username);
+              this.axios.post("/personCustom_api/PersonTp5/public/index/bs/log_add",params).then(res=>
+          {
             this.$router.push("/index");
+          });
+            // console.log(res.data.data.nickname);
+
           }
             else
             {

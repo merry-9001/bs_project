@@ -6,12 +6,12 @@
           <router-link class="headspan" to="/index">
             <i class="iconfont icon-icon_huabanfuben"></i>
           </router-link>
-           <router-link class="headspan" to="/Resources">资源（电影链接）&nbsp;</router-link>
+           <router-link class="headspan" to="/Resources">资源（链接）&nbsp;</router-link>
           <router-link class="headspan" to="/Product">提问回答&nbsp;</router-link>
           <!-- <router-link class="headspan" to="/Qualifications">申请资质</router-link> -->
           <router-link class="headspan" to="/Market">交易市场</router-link>
           <router-link class="headspan" to="/Video">视频</router-link>
-          <router-link class="headspan" to="/Market">论坛</router-link>
+          <router-link class="headspan" to="/Express">快递信息服务</router-link>
         </div>
       </el-col>
       <el-col :md="14" class="hidden-xs-only">
@@ -33,10 +33,10 @@
           <router-link to="/order" class="headspan">&nbsp;&nbsp;我的中心</router-link> -->
     <el-dropdown  class="down" trigger="click">
       <span class="el-dropdown-link">
+        <!-- {{$store.state.user.headphoto}} -->
         {{$store.state.user.username}}<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu   slot="dropdown">
-       
         <el-dropdown-item icon="el-icon-shopping-cart-full" @click.native="handleEdit(1)">购物车</el-dropdown-item>
         <el-dropdown-item icon="el-icon-circle-plus" @click.native="handleEdit(2)">订单</el-dropdown-item>
         <el-dropdown-item icon="el-icon-circle-plus-outline" @click.native="handleEdit(3)">个人中心</el-dropdown-item>
@@ -45,27 +45,6 @@
     </el-dropdown>
 
         </div>
-        <!-- <el-dialog title="私人订制" :visible.sync="dialogVisible" width="50%">
-          <span class="red" v-if="flag==1">您好，您的资质申请已通过，账号密码为会员账号</span>
-          <span class="red" v-else-if="flag==-1">您好，您的资质申请未通过</span>
-          <br />
-          <br />
-          <span class="red">提问回答如下</span>
-
-          <div v-for="item in question" :key="item.question_id" class="border">
-            <div class="question">
-              <div class="question_content">{{item.question_content}}</div>
-              <div>回答时间：{{item.solve_time}}</div>
-            </div>
-            <div class="Answer">
-              <div class="answer11">回答一：{{item.solve_content1}}</div>
-              <div>回答二：{{item.solve_content2}}</div>
-            </div>
-          </div>
-          <span slot="footer" class="dialog-footer">
-            <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-          </span>
-        </el-dialog>-->
       </el-col>
   <div class="mobie_menus">
         <el-col :xs="24" class="hidden-sm-and-up">
@@ -87,11 +66,11 @@
     <router-link tag="li" class="headspan" to="/Market">交易市场&nbsp;</router-link>
     <router-link tag="li" class="headspan" to="/Video">视频&nbsp;</router-link>
             </ul>
-            <ul v-else>
+            <!-- <ul v-else>
               <li>sa</li>
               <li>ss</li>
               <li>wssads</li>
-            </ul>
+            </ul> -->
           </el-col>
 
     </el-row>
@@ -108,7 +87,8 @@ export default {
       question: [],
       flag: 0,
       menuview: "hidden-lg-and-down",
-      buttion_flag:0
+      buttion_flag:0,
+       activeIndex: '1',
     };
   },
   components: {},
@@ -195,6 +175,12 @@ export default {
 };
 </script>
 <style scoped lang="less">
+ .router-link-active{
+  //  background: #409EFF;
+  // background:lightblue;
+    // color: #43b5f7;
+  text-decoration: underline;
+ }
 .down{
   margin-right:200px;
   // width:100px;
@@ -240,10 +226,9 @@ ul,li{ padding:0;margin:0;list-style:none}
 .el-menu-demo {
   width: 100%;
 }
-.headspan.router-link-active {
-  color: #43b5f7;
-  text-decoration: none;
-}
+// .headspan.router-link-active {
+
+// }
 .el-header {
   background-color: #f5f5f5;
   padding-left: 0px;
@@ -272,6 +257,7 @@ ul,li{ padding:0;margin:0;list-style:none}
         text-decoration: none;
         color: black;
         padding-left: 0.3rem;
+        // font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
       }
       .headspan:last-child{
         padding-right:4rem;
