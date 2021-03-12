@@ -39,13 +39,11 @@
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-
           <div v-if="scope.row.rs_status==0">
              <el-button  size="mini" @click="handleEdit(scope.$index, scope.row)">解答</el-button>
               <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">取消</el-button>
             </div>
             <el-button disabled v-else  size="mini" @click="handleEdit(scope.$index, scope.row)">已完成</el-button>
-         
         </template>
       </el-table-column>
     </el-table>

@@ -98,13 +98,13 @@ export default {
       this.$router.push("/UploadVideo");
     },
     ToDetail(id,sort){
- this.axios
-        .get("/personCustom_api/PersonTp5/public/index/bs/video_number?id="+id)
-        .then(res => {
-          // console.log(res);
-          // this.data = res.data.data;
-          // console.log(this.data);
-        });
+//  this.axios
+//         .get("/personCustom_api/PersonTp5/public/index/bs/video_number?id="+id)
+//         .then(res => {
+//           // console.log(res);
+//           // this.data = res.data.data;
+//           // console.log(this.data);
+//         });
 
 
          this.$router.push("/Video_detail/"+id+"/"+sort);     

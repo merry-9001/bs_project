@@ -140,7 +140,7 @@ export default {
               });
           }
         } else {
-          console.log(this.formData);
+          // console.log(this.formData);
           this.$message.error("请填写完整数据");
         }
       });

@@ -67,13 +67,9 @@ export default {
       this.axios
         .get("/personCustom_api/PersonTp5/public/index/bs/resource_select")
         .then(res => {
-          // console.log(res);
           this.data = res.data.data;
           console.log(this.data);
-          // setTimeout(()=>{
-
-          // },2000)
-                      this.show=true;
+          this.show=true;
         });
     },
     ToDetail(id) {
@@ -94,7 +90,7 @@ export default {
         // });
     },
     search() {
-                      var params = new URLSearchParams();
+          var params = new URLSearchParams();
           params.append("input", this.input);
                     // console.log( this.input);
       this.axios

@@ -51,15 +51,6 @@ export default {
     };
   },
   mounted() {
-    // this.axios
-    //   .get("/personCustom_api/PersonTp5/public/index/bs/yu")
-    //   .then(res => {
-    //     console.log(res);
-    //     this.personData = res.data.data;
-    //     console.log(this.personData);
-    //   });
-
-
     this.axios
       .get("/personCustom_api/PersonTp5/public/index/bs/project_type")
       .then(res => {

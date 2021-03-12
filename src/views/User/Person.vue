@@ -268,7 +268,7 @@ import PersonDialog from "@/components/User/PersonDialog.vue";
 export default {
   data() {
     return {
-            tableData_user:[],
+      tableData_user:[],
       money:0,
       password:'',
       tableData: [],

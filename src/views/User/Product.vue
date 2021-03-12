@@ -92,7 +92,7 @@ export default {
       // data: [],
       questions: [],
       input: "",
-      activeNames: ["1"],
+      // activeNames: ["1"],
       apprise: [],
       inputs: "",
       show:false,
@@ -128,21 +128,13 @@ export default {
     },
 
     product_show() {
-      // this.axios
-      //   .get("/personCustom_api/PersonTp5/public/admin/index/product_show")
-      //   .then(res => {
-      //     // console.log(res);
-      //     this.data = res.data.data;
-      //     console.log(this.data);
-      //   });
-
       this.axios
         .get("/personCustom_api/PersonTp5/public/index/bs/question_select")
         .then(res => {
           console.log(res.data.data);
           this.questions = res.data.data;
           console.log(this.questions);
-                                this.show=true;
+          this.show=true;
         });
     },
 
@@ -157,9 +149,9 @@ export default {
           console.log(this.apprise);
         });
     },
-    ToDetail(id) {
-      this.$router.push("/detail/1/" + id);
-    },
+    // ToDetail(id) {
+    //   this.$router.push("/detail/1/" + id);
+    // },
 
     // ?id=" + cityId
     search() {

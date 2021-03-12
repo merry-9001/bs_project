@@ -1,131 +1,76 @@
-import Index from '@/views/Admin/index.vue';
-import Home from '@/views/Admin/Home.vue';
-import InfoShow from '@/views/Admin/InfoShow.vue';
-import FoundList from '@/views/Admin/FoundList.vue';
-import FoundList2 from '@/views/Admin/FoundList2.vue';
-import FoundList3 from '@/views/Admin/FoundList3.vue';
-import Person from '@/components/Admin/PersonCenter.vue'
-import PersonDatabse from '@/components/Admin/PersonDatabse.vue'
-import PersonLogo from '@/components/Admin/PersonLogo.vue'
-import PersonVideo from '@/components/Admin/PersonVideo.vue'
-import PersonUserState from '@/components/Admin/PersonUserState.vue'
-import Order from '@/views/Admin/Order.vue'
-import Question from '@/views/Admin/Question.vue'
-import User from '@/views/Admin/User.vue'
-import Apply from '@/views/Admin/Apply.vue'
 export default {
   path: '/admin/index',
-  component: Index,
+  component: resolve => require(['@/views/Admin/index.vue'], resolve),
   children: [
     {
       path: '',
-      component: Home,
+      component: resolve => require(['@/views/Admin/Home.vue'], resolve),
     },
     {
       path: '/admin/home',
       name: 'home',
-      component: Home,
+      component: resolve => require(['@/views/Admin/Home.vue'], resolve),
     },
     {
       path: '/admin/PersonUserState',
       name: 'PersonUserState',
-      component: PersonUserState,
+      component: resolve => require(['@/components/Admin/PersonUserState.vue'], resolve),
     },
     {
       path: '/admin/infoshow',
       name: 'infoshow',
-      component: InfoShow,
+      component: resolve => require(['@/views/Admin/InfoShow.vue'], resolve),
     },
     {
       path: '/admin/fundlist',
       name: 'fundlist',
-      component: FoundList,
+      component: resolve => require(['@/views/Admin/FoundList.vue'], resolve),
     },
     {
       path: '/admin/fundlist2',
       name: 'fundlist',
-      component: FoundList2,
+      component: resolve => require(['@/views/Admin/FoundList2.vue'], resolve),
     },    {
       path: '/admin/fundlist3',
       name: 'fundlist',
-      component: FoundList3,
+      component: resolve => require(['@/views/Admin/FoundList3.vue'], resolve),
     },
     
     {
       path: '/admin/PersonCustom',
-      component: Person,
+      component: resolve => require(['@/components/Admin/PersonCenter.vue'], resolve),
   },
   {
     path: '/admin/PersonLogo',
-    component: PersonLogo,
+    component: resolve => require(['@/components/Admin/PersonLogo.vue'], resolve),
 },
   {
     path: '/admin/PersonCustom',
-    component: Person,
+    component: resolve => require(['@/components/Admin/PersonCenter.vue'], resolve),
 },
   {
     path: '/admin/PersonDatabse',
-    component: PersonDatabse,
+    component: resolve => require(['@/components/Admin/PersonDatabse.vue'], resolve),
 },
 {
   path: '/admin/PersonVideo',
-  component: PersonVideo,
+  component: resolve => require(['@/components/Admin/PersonVideo.vue'], resolve),
 },
   {
       path: '/admin/Order',
-      component: Order,
+      component: resolve => require(['@/views/Admin/Order.vue'], resolve),
   },
   {
       path: '/admin/question',
-      component: Question,
+      component: resolve => require(['@/views/Admin/Question.vue'], resolve),
   },
   {
       path: '/admin/user',
-      component: User,
+      component: resolve => require(['@/views/Admin/User.vue'], resolve),
   },
   {
       path: '/admin/apply',
-      component: Apply,
+      component: resolve => require(['@/views/Admin/Apply.vue'], resolve),
   }
   ],
 };
-
-// const router = new Router({
-//     mode: 'history',
-//     base: process.env.BASE_URL,
-//     routes: [{
-//             path: '/index',
-//             component: Index,
-//             children: [{
-//                     path: '',
-//                     component: Home
-//                 },
-//                 {
-//                     path: '/home',
-//                     name: 'home',
-//                     component: Home
-//                 },
-//                 {
-//                     path: '/infoshow',
-//                     name: 'infoshow',
-//                     component: InfoShow
-//                 },
-//                 {
-//                     path: '/fundlist',
-//                     name: 'fundlist',
-//                     component: FoundList
-//                 }
-//             ]
-//         }
-//     ]
-// });
-
-// router.beforeEach((to, from, next) => {
-//     const isLogin = localStorage.eleToken ? true : false;
-//     if (to.path == '/login' || to.path == '/register') {
-//         next();
-//     } else {
-//         isLogin ? next() : next('/login');
-//     }
-// })
-// export default router;
