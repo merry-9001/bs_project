@@ -4,58 +4,46 @@
           <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item>首页</el-breadcrumb-item>
         <el-breadcrumb-item>私人订制项目</el-breadcrumb-item>
-        <el-breadcrumb-item>资源链接</el-breadcrumb-item>
+        <el-breadcrumb-item>日志管理</el-breadcrumb-item>
       </el-breadcrumb>
 
     </div>
-    <el-table :data="nowTableData" style="width: 100%">
-      <el-table-column label="序号" width="100">
+    <el-table :data="tableData" style="width: 100%">
+
+      <el-table-column label="用户名">
         <template slot-scope="scope">
           <!-- <i class="el-icon-time"></i> -->
-          <span style="margin-left: 10px">{{ scope.row.project_id }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="项目名称">
-        <template slot-scope="scope">
-          <!-- <i class="el-icon-time"></i> -->
-          <span>{{ scope.row.project_name }}</span>
+          <span>{{ scope.row.username }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="介绍">
+      <el-table-column label="用户类型">
         <template slot-scope="scope">
-          <span>{{ scope.row.project_introduce }}</span>
+          <span>{{ scope.row.type }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="备注">
+
+      <el-table-column label="进入系统时间">
         <template slot-scope="scope">
-          <span>{{ scope.row.project_remake }}</span>
+          <span>{{ scope.row.time }}</span>
+        </template>
+    </el-table-column>
+    
+      <el-table-column label="登录情况">
+        <template slot-scope="scope">
+          <span>{{ scope.row.state }}</span>
         </template>
       </el-table-column>
-            <el-table-column  label="图片" >
-          <template slot-scope="scope">
-              <img :src="scope.row.project_src" class="head">
-              </template>
-      </el-table-column>
-      <el-table-column label="操作">
+      <!-- <el-table-column label="余额">
         <template slot-scope="scope">
-          <div v-if="scope.row.rs_status==0">
-             <el-button  size="mini" @click="handleEdit(scope.$index, scope.row)">解答</el-button>
-              <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">取消</el-button>
-            </div>
-            <el-button disabled v-else  size="mini" @click="handleEdit(scope.$index, scope.row)">已完成</el-button>
+          <span>{{ scope.row.balance }}</span>
         </template>
-      </el-table-column>
+      </el-table-column> -->
+
+
     </el-table>
 
-        <el-pagination class="page"
-        background
-        layout="prev, pager, next"
-        :current-page.sync="currentPage"
-        :page-size="pageSize"
-        :total="tableData.length">
-        </el-pagination>
-    <PersonDialog :dialog="dialog" :formData="formData" @func="getMsgFormSon" @update="getPerson"></PersonDialog>
+   
   </div>
 </template>
 
@@ -88,22 +76,38 @@ export default {
     this.getPerson();
   },
   methods: {
-    handleEdit(index, row) {
-      console.log(index, row);
-      this.dialog = {
-        show: true,
-        title: "资源",
-        option: "edit"
-      };
-      this.formData = {
-        project_name: row.project_name,
-        project_price: row.project_price,
-        project_introduce: row.project_introduce,
-        project_remake: row.project_remake,
-        project_src: row.project_src,
-        project_id: row.project_id,
-      };
+    handleEdit(row) {
+      var params = new URLSearchParams();
+      params.append("username",row.username);
+      this.axios
+        .post("/personCustom_api/PersonTp5/public/index/bs/admin_user_freeze_open", params)
+        .then(res => {
+              this.$message({
+                message: '冻结成功',
+                type: 'success'
+              });
+            this.getPerson();
+          // }
+        });
     },
+    handleEdit1(row) {
+
+      var params = new URLSearchParams();
+      params.append("username",row.username);
+      this.axios
+        .post("/personCustom_api/PersonTp5/public/index/bs/admin_user_freeze", params)
+        .then(res => {
+              this.$message({
+                message: '解冻成功',
+                type: 'success'
+              });
+            this.getPerson();
+          // }
+        });
+
+      // console.log(row);
+    },
+
     handleDelete(index, row) {
       console.log(row.project_id);
       var params = new URLSearchParams();
@@ -123,7 +127,7 @@ export default {
         });
     },
     getPerson() {
-      this.axios.get("/personCustom_api/PersonTp5/public/index/bs/adminResource_select").then(res => {
+      this.axios.get("/personCustom_api/PersonTp5/public/index/bs/admin_log_select").then(res => {
         console.log(res);
           this.tableData = res.data.data;
           console.log(this.tableData);
@@ -133,21 +137,7 @@ export default {
       });
       // console.log('asds');
     },
-    handleAdd() {
-      this.dialog = {
-        show: true,
-        title: "添加项目",
-        option: "add"
-      };
-      this.formData={
-        project_name: "",
-        project_price: "",
-        project_introduce: "",
-        project_remake: "",
-        project_src: "",
-        project_id: "",
-      }
-    },
+
     getMsgFormSon(data){
         console.log(this.formData.project_src);
         this.formData.project_src='http://localhost:8000/personCustom_api/images/admin/person/'+data;
@@ -160,12 +150,7 @@ export default {
 
   components: {
     PersonDialog
-  },
-    computed:{
-        nowTableData(){
-            return this.tableData.slice( (this.currentPage - 1)*this.pageSize , this.currentPage*this.pageSize ) || [];
-        }
-    }
+  }
 };
 </script>
 <style scoped lang="less">

@@ -59,10 +59,10 @@ export default {
           this.id
       )
       .then(res => {
-           console.log(res);
+        console.log(res);
         this.personDetail = res.data.data;
         console.log(res.data.data1);
-        //    this.personData=res.data.data.personSelect;
+        //  this.personData=res.data.data.personSelect;
         //  console.log(this.personData);
       });
   },
@@ -108,11 +108,6 @@ export default {
   .box-card {
     width: 100%;
   }
-
-
-
-
-
 .remake {
   padding-bottom: 10px;
   padding-top: 10px;

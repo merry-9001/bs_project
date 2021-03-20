@@ -1,8 +1,5 @@
 import axios from 'axios';
-
-
 import { Message, Loading } from 'element-ui';
-
 let loading; //定义loading变量
 function startLoading() { //使用Element loading-start 方法
     loading = Loading.service({
@@ -26,6 +23,20 @@ axios.interceptors.request.use(config => {
 
 // 解构
 axios.interceptors.response.use(response => {
+
+    if (response.data.code) {
+        switch (response.data.code) {
+          case 1002:
+            // this.$notify({
+            //     title: '信息',
+            //     message: '操作成功',
+            //     duration: 0
+            //   });
+            console.log('我出发了')
+        }
+      }
+
+    
     endLoading();
     return response;
 }, err => {

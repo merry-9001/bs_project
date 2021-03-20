@@ -1,83 +1,82 @@
-import Home from '@/views/User/Home.vue'
-import Login from '@/views/User/Login.vue'
-import Register from '@/views/User/Register.vue'
-import Index from '@/views/User/Index.vue'
-import Detail from '@/views/User/Detail.vue'
-import Cart from '@/views/User/Cart.vue'
-import Order from '@/views/User/Order.vue'
-import Question from '@/views/User/Question.vue'
-import Product from '@/views/User/Product.vue'
-import Qualifications from '@/views/User/Qualifications.vue'
-import Resources from '@/views/User/Resources.vue'
-import Market from '@/views/User/Market.vue'
-import Video from '@/views/User/Video.vue'
-import Video_detail from '@/views/User/Video_detail.vue'
-import Person from '@/views/User/Person.vue'
 export default {
     path: '/',
-    component: Home,
+    component: resolve => require(['@/views/User/Home.vue'], resolve),
     children: [{
         path: '/',
-        component: Index
+        component: resolve => require(['@/views/User/Index.vue'], resolve)
+        // component: Index
+    },
+    {
+        path: 'UploadVideo',
+        component: resolve => require(['@/views/User/UploadVideo.vue'], resolve)
+        // component: UploadVideo
+    },
+    {
+        path: 'express',
+        component: resolve => require(['@/views/User/Express_select.vue'], resolve)
+    },
+    {
+        path: 'money',
+        component: resolve => require(['@/views/User/Money.vue'], resolve)
     },
     {
         path: 'login',
-        component: Login
+        component: resolve => require(['@/views/User/Login.vue'], resolve)
     },
     {
         path: 'register',
-        component: Register
+        component: resolve => require(['@/views/User/Register.vue'], resolve)
     },
     {
         path: 'index',
-        component: Index
+        component: resolve => require(['@/views/User/Index.vue'], resolve)
     },
     {
         path: 'detail/:id',
-        component: Detail
+        component: resolve => require(['@/views/User/Detail.vue'], resolve)
     },
     {
         path: 'cart',
-        component: Cart
+        component: resolve => require(['@/views/User/Cart.vue'], resolve)
     },
     {
         path: 'order',
-        component: Order
+        component: resolve => require(['@/views/User/Order.vue'], resolve)
     },
     {
         path: 'Question',
-        component: Question
+        component: resolve => require(['@/views/User/Question.vue'], resolve)
     },
     {
         path: 'Product',
-        component: Product
+        component: resolve => require(['@/views/User/Product.vue'], resolve)
     },
     {
         path: 'Qualifications',
-        component: Qualifications
+        component: resolve => require(['@/views/User/Qualifications.vue'], resolve)
     },
     {
         path: 'Resources',
-        component: Resources
+        component: resolve => require(['@/views/User/Resources.vue'], resolve)
     }
     ,
     {
         path: 'Market',
-        component: Market
+        component: resolve => require(['@/views/User/Market.vue'], resolve)
     }
     ,
     {
         path: 'Video',
-        component: Video
+        component: resolve => require(['@/views/User/Video.vue'], resolve)
     },    
     {
         path: 'Video_detail/:id/:sort',
-        component: Video_detail
+        component: resolve => require(['@/views/User/Video_detail.vue'], resolve)
     }
     ,    
     {
         path: 'Person',
-        component: Person
+        component: resolve => require(['@/views/User/Person.vue'], resolve)
     }
     ]
 }

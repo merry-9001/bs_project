@@ -13,25 +13,30 @@
     </el-row>
 
     <el-row >
-      <div v-for="item in data_name" :key="item.username" class="pro_flex">
-      <div v-show="item.username!=$store.state.user.username" class="username">  <h1>{{item.username}}的店铺</h1></div>
-      <div v-for="(items,index) in data_pro" :key="index" >
+        <transition name="el-zoom-in-top">
+          <div  v-show="show">
+            <div v-for="item in data_name" :key="item.username" class="pro_flex">
+            <div v-show="item.username!=$store.state.user.username" class="username">  <h1>{{item.username}}的店铺</h1></div>
+            <div v-for="(items,index) in data_pro" :key="index" >
 
-           <div v-show="item.username==items.username && item.username!=$store.state.user.username" class="content" >
-    
-        <el-card shadow>
-          <img :src="items.project_src" class="image" />
-          <div style="padding: 14px;">
-            <span class="price">{{items.project_name}}</span>
-            <div>
-              <span class="price">¥{{items.project_price}}</span>
-              <el-button type="primary" plain  @click="ToDetail(items.project_id)">详细</el-button>
+                <div v-show="item.username==items.username && item.username!=$store.state.user.username" class="content" >
+          
+              <el-card shadow>
+                <!-- v-lazy -->
+                <img v-lazy="items.project_src" class="image" />
+                <div style="padding: 14px;">
+                  <span class="price">{{items.project_name}}</span>
+                  <div>
+                    <span class="price">¥{{items.project_price}}</span>
+                    <el-button type="primary" plain  @click="ToDetail(items.project_id)">详细</el-button>
+                  </div>
+                </div>
+              </el-card>
+                </div>
+            </div>
             </div>
           </div>
-        </el-card>
-           </div>
-      </div>
-      </div>
+       </transition>
     </el-row>
   </div>
 </template>
@@ -43,7 +48,8 @@ export default {
       data_name: [],
       data_pro: [],
       input: "",
-      type: []
+      type: [],
+      show:false,
     };
   },
   components: { Logo },
@@ -57,6 +63,7 @@ export default {
           this.data_pro = res.data.data;
           this.data_name = res.data.data1;
           console.log(this.data_name );
+          this.show=true;
         });
     },
     ToDetail(id) {

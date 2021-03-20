@@ -6,6 +6,7 @@ const state = {
     nickname: window.localStorage.getItem('nickname') || '',
     username: window.localStorage.getItem('username') || '',
     headphoto: window.localStorage.getItem('headphoto') || '',
+    rr:  '',
 };
 const actions = {
 
@@ -20,6 +21,7 @@ const mutations = {
         state.nickname = payload.nickname;
         state.username = payload.username;
         state.headphoto = payload.headphoto;
+        state.rr = payload.rr;
         // state.userHead = payload.userHead;
     }
     

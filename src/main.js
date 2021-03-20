@@ -7,6 +7,12 @@ import axios from './http.js'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
+// import VuexPersistence from 'vuex-persist'
+// Vue.use(VuexPersistence)
+
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload)
+
 import vueSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 
@@ -18,6 +24,11 @@ import Video from 'video.js'
 import 'video.js/dist/video-js.css'
 
 Vue.prototype.$video = Video
+
+import echarts from 'echarts'
+ 
+Vue.prototype.$echarts = echarts
+
 
 window.router=router;
 Vue.use(ElementUI);
