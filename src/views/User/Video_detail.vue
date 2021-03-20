@@ -91,11 +91,6 @@ export default {
         .then(res => {
           this.select_comment();
           this.inputs = "";
-                    this.$notify({
-          title: '回答',
-          message: '评论成功，积分+5',
-          duration: 0
-        });
         });
     },
     playVideo() {

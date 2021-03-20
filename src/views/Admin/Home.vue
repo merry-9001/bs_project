@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <div class="container">
-            <h1 class="title">欢迎来到系统后台</h1>
+            <h1 class="title">仅仅只是敲键盘</h1>
         </div>
     </div>
 </template>

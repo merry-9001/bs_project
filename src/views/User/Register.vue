@@ -178,7 +178,7 @@ export default {
             console.log(this.formData);
             this.axios
               .post(
-                "/personCustom_api/PersonTp5/public/index/bs/userRegister",
+                "/personCustom_api/PersonTp5/public/admin/index/userRegister",
                 params
               )
               .then(res => {

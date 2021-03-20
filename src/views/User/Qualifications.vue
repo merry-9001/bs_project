@@ -120,13 +120,13 @@ export default {
           "Content-Type": "multipart/form-data"
         }
       };
-      this.axios.post("/personCustom_api/picUploadResource.php", param, config).then(res => {
+      this.axios.post("/management_api/picUpload.php", param, config).then(res => {
         console.log(res);
          var stauts = res.data.stauts;
         // console.log(msg);
         // var that = this;
          if (stauts === "ok") {
-           this.sizeForm.src='http://localhost:8000/personCustom_api/upload/'+res.data.address;
+           this.sizeForm.src='http://47.96.175.28/management_api/upload/'+res.data.address;
           //  this.msg=res.data.address;
           //  this.$emit('func',this.msg)
             // console.log(this.msg);
@@ -135,13 +135,13 @@ export default {
     },
   },
   mounted() {
-    // this.axios
-    //   .get("/personCustom_api/PersonTp5/public/index/bs/apply_type")
-    //   .then(res => {
-    //     // console.log(res);
-    //     this.type = res.data.data;
-    //     console.log(this.type);
-    //   });
+    this.axios
+      .get("/personCustom_api/PersonTp5/public/index/bs/apply_type")
+      .then(res => {
+        // console.log(res);
+        this.type = res.data.data;
+        console.log(this.type);
+      });
   }
 };
 </script>

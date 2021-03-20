@@ -3,17 +3,11 @@
     <Logo>
       <span slot="name">视频中心</span>
     </Logo>
-
-    <transition name="el-zoom-in-center">
-      <div v-show="show">
     <el-row class="row-mobile">
       <el-col :xs="24" :lg="8">
         <div class="col_center1">
           <el-input placeholder="搜索" v-model="input" clearable maxlength="10" width="100"></el-input>
           <el-button @click="search()" icon="el-icon-search"></el-button>
-                  <div class="col_center1 buttons">
-           <el-button type="success" size="small" @click="sumbit()">上传视频</el-button>
-        </div>
         </div>
       </el-col>
     </el-row>
@@ -27,7 +21,6 @@
             <el-radio-button label="娱乐">娱乐</el-radio-button>
             <el-radio-button label="全部" aria-checked>全部</el-radio-button>
           </el-radio-group>
-          
         </div>
       </el-col>
     </el-row>
@@ -46,8 +39,6 @@
         </el-col>
       </div>
     </el-row>
-    </div>
-      </transition>
   </div>
 </template>
 <script>
@@ -58,8 +49,7 @@ export default {
       data: [],
       input: "",
       type: [],
-      tabPosition: "1",
-      show:false,
+      tabPosition: "1"
     };
   },
   components: { Logo },
@@ -75,12 +65,11 @@ export default {
           // console.log(res);
           this.data = res.data.data;
           console.log(this.data);
-          this.show=true;
         });
     },
     search() {
 
-          var params = new URLSearchParams();
+                var params = new URLSearchParams();
           params.append("sort", this.tabPosition);
           params.append("input", this.input);
           console.log(this.tabPosition);
@@ -95,16 +84,16 @@ export default {
         });
     },
     sumbit() {
-      this.$router.push("/UploadVideo");
+      this.$router.push("/Qualifications");
     },
     ToDetail(id,sort){
-//  this.axios
-//         .get("/personCustom_api/PersonTp5/public/index/bs/video_number?id="+id)
-//         .then(res => {
-//           // console.log(res);
-//           // this.data = res.data.data;
-//           // console.log(this.data);
-//         });
+ this.axios
+        .get("/personCustom_api/PersonTp5/public/index/bs/video_number?id="+id)
+        .then(res => {
+          // console.log(res);
+          // this.data = res.data.data;
+          // console.log(this.data);
+        });
 
 
          this.$router.push("/Video_detail/"+id+"/"+sort);     

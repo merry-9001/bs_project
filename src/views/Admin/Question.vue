@@ -6,16 +6,18 @@
         <template slot-scope="props">
           <el-form label-position="left" class="demo-table-expand">
             <el-form-item label="问题Id">
-              <span>{{ props.row.quetion_id }}</span>
+              <span>{{ props.row.question_id }}</span>
             </el-form-item>
-
+            <el-form-item label="时间">
+              <span>{{ props.row.question_time }}</span>
+            </el-form-item>
             <el-form-item label="提问用户">
               <span>{{ props.row.username }}</span>
             </el-form-item>
           </el-form>
         </template>
       </el-table-column>
-      <el-table-column label="问题" prop="quetion_introduce"></el-table-column>
+      <el-table-column label="问题" prop="question_content"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button v-if="scope.row.state==0" size="mini" @click="handleEdit(scope.row)">回答</el-button>
@@ -47,8 +49,8 @@ export default {
     handleEdit(row) {
       this.dialog = {
         show: true,
-        id: row.quetion_id,
-        question: row.quetion_introduce
+        id: row.question_id,
+        question: row.question_content
       };
       // console.log(row);
     },
@@ -57,16 +59,15 @@ export default {
       params.append("question_id",id);
       params.append("solve_content1", slove1);
       this.axios
-        .post("/personCustom_api/PersonTp5/public/index/bs/question_sumbit",params)
+        .post("/personCustom_api/PersonTp5/public/admin/bs/question_sumbit",params)
         .then(res => {
-          console.log(id);
           console.log(res);
         });
           this.render();
     },
     render(){
     this.axios
-      .get("/personCustom_api/PersonTp5/public/index/bs/question_select_admin")
+      .get("/personCustom_api/PersonTp5/public/admin/bs/question_select_admin")
       .then(res => {
         //   console.log(res);
         this.tableData1 = res.data.data;

@@ -3,12 +3,9 @@
     <!-- <el-container> -->
      <UserHead></UserHead>
 
-<!-- <transition name="el-zoom-in-center"> -->
-  <!-- <div  v-show="show"> </div> -->
         <div class="rightContainer">
             <router-view></router-view>
         </div>
-         <!-- </transition> -->
      <UserFooter></UserFooter>
 
     <!-- </el-container> -->
@@ -20,7 +17,6 @@ import UserFooter from "@/components/User/UserFooter.vue";
 import UserHead from "@/components/User/HeadNav.vue";
 export default {
   name: "home",
- 
   components: {
     UserFooter,
     UserHead

@@ -7,12 +7,11 @@
       </el-col>
       <el-col :span="6" class="user">
         <div class="userinfo">
-          <!-- <i style="font-size: 30px;" class="far fa-user-circle">
+          <i style="font-size: 30px;" class="far fa-user-circle">
             <img :src="$store.state.user.userHead" class="avatar" alt="">
             
-          </i> -->
+          </i>
           <div class="welcome">
-            <!-- $store.state.user.username -->
             <span class="name comename">欢迎</span>
             <br/>
             <span class="name avatarname">{{$store.state.user.name}}</span>

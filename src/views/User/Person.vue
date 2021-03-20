@@ -113,137 +113,9 @@
         </el-table>
 
          </el-tab-pane>
-          <el-tab-pane label="个人信息" name="person">
-                <el-divider content-position="left">账户信息
-
-                </el-divider>
-<el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
-  
-  
-            <!-- username: '',
-          nickname: '',
-          register_time: '',
-          freeze: '',
-          store_state: '',
-          balance: '',
-          sign: '',
-          integral: '', -->
-  
-        <el-form-item  label="用户名">
-          <el-input disabled v-model="formLabelAlign.username"></el-input>
-        </el-form-item>
-
-        <el-form-item  label="注册时间">
-          <el-input disabled v-model="formLabelAlign.register_time"></el-input>
-        </el-form-item>
-        <el-form-item  label="账户情况">
-          <el-input v-if="formLabelAlign.freeze==1" disabled value="正常"></el-input>
-          <el-input v-else  disabled value="禁用"></el-input>
-
-        </el-form-item>
-       <el-form-item  label="店铺状态">
-     
-          <el-input v-if="formLabelAlign.store_state==1" disabled value="营业中"></el-input>
-          <el-input v-else  disabled value="未开店"></el-input>
-        </el-form-item>
-        <el-form-item  label="余额">
-          <el-input disabled v-model="formLabelAlign.balance"></el-input>
-        </el-form-item>
-        <el-form-item  label="积分">
-          <el-input disabled v-model="formLabelAlign.integral"></el-input>
-        </el-form-item>
-
-        <el-divider content-position="left">签到与充值</el-divider>
-        <el-form-item  label="签到">
-                  <el-button
-                    v-if="formLabelAlign.sign=='0'"
-                    @click="handleDelete33()"
-                    type="success"
-                  >签到</el-button>
-                  <el-button
-                    v-else 
-                    disabled
-                    type="danger"
-                  >今日已签到</el-button>
-        </el-form-item>
-
-
-        <el-form-item  label="充值">
-                   <el-button
-    
-                    @click="charge()"
-                 
-                  >充值</el-button>
-
-        </el-form-item>
-
-
-        <el-divider content-position="left">个人信息</el-divider>
-        <el-form-item  label="密码">
-          <el-input  v-model="formLabelAlign.password" type="password"></el-input>
-        </el-form-item>
-        <el-form-item  label="昵称">
-          <el-input  v-model="formLabelAlign.nickname"></el-input>
-        </el-form-item>
-        <el-form-item  label="介绍">
-          <el-input  v-model="formLabelAlign.Introduction"></el-input>
-        </el-form-item>
-        <el-form-item label prop="info">
-          <el-switch v-model="formLabelAlign.delivery"></el-switch>确认此操作
-        </el-form-item>
-        <el-form-item size="large">
-          <el-button type="primary" @click="onSubmit()">提交</el-button>
-        </el-form-item>
-
-</el-form>
-
-
-            
-          </el-tab-pane>
+          <el-tab-pane label="个人信息" name="person">个人信息</el-tab-pane>
          
-          <el-tab-pane label="资源链接" name="fourth">
-
-
-
-    <el-table :data="tableData_user" style="width: 100%">
-
-      <el-table-column label="项目名称" width="150">
-        <template slot-scope="scope">
-          <!-- <i class="el-icon-time"></i> -->
-          <span>{{ scope.row.project_name }}</span>
-        </template>
-      </el-table-column>
-
-
-      <el-table-column label="解决方案介绍" width="480">
-        <template slot-scope="scope">
-          <span>{{ scope.row.project_remake }}</span>
-        </template>
-      </el-table-column>
-            <el-table-column  label="图片" >
-          <template slot-scope="scope">
-              <img :src="scope.row.project_src" class="head">
-              </template>
-      </el-table-column>
-      <el-table-column label="文件下载">
-        <template slot-scope="scope">
-          <div>
-            <span @click="See(scope.row.url)">附件</span>
-          </div>
-          <!-- <div v-if="scope.row.rs_status==0">
-             <el-button  size="mini" @click="handleEdit(scope.$index, scope.row)">解答</el-button>
-              <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">取消</el-button>
-            </div>
-            <el-button disabled v-else  size="mini" @click="handleEdit(scope.$index, scope.row)">已完成</el-button>
-          -->
-        </template>
-      </el-table-column>
-    </el-table>
-
-
-
-
-          </el-tab-pane>
+          <el-tab-pane label="定时任务补偿" name="fourth">askfjsalkf</el-tab-pane>
         </el-tabs>
       </el-col>
     </el-row>
@@ -268,9 +140,6 @@ import PersonDialog from "@/components/User/PersonDialog.vue";
 export default {
   data() {
     return {
-      tableData_user:[],
-      money:0,
-      password:'',
       tableData: [],
       tableData_express:[],
       dialog: {
@@ -288,87 +157,16 @@ export default {
         project_src: ""
       },
       activeName: "second",
-      order_id:"",
-      formLabelAlign: {
-          username: '',
-          nickname: '',
-          register_time: '',
-          freeze: '',
-          store_state: '',
-          balance: '',
-          sign: '',
-          integral: '',
-          password: '',
-          Introduction: '',
-      },
-      labelPosition: 'right',
+      order_id:""
     };
   },
 
   created() {
     this.getPerson();
-    this.getPerson_user();
+    
     this.getPerson_express();
-    this.getPerson_project();
   },
   methods: {
-    charge(){
-            this.$router.push("/money");
-    },
-    See(e){
-      window.location.href = e;
-    },
-    getPerson_project() {
-              var params=new URLSearchParams();
-        params.append("username",this.$store.state.user.username);
-      this.axios.post("/personCustom_api/PersonTp5/public/index/bs/userResource_select",params)
-      .then(res => {
-        console.log(res);
-          this.tableData_user = res.data.data;
-          console.log(this.tableData);
-          // this.filterTableData= res.data.data.product;
-          // this.setPageinations();
-        
-      });
-      // console.log('asds');
-    },
-
-
-
-
-    handleDelete33(){
-        var params=new URLSearchParams();
-        params.append("username",this.$store.state.user.username);
-      this.axios.post("/personCustom_api/PersonTp5/public/index/bs/update_check",params)
-      .then(res=>{
-        console.log(res);
-        })
-      this.getPerson_user();
-    },
-  onSubmit(){
-        var params=new URLSearchParams();
-        params.append("username",this.$store.state.user.username);
-        params.append("nickname",this.formLabelAlign.nickname);
-        params.append("password", this.formLabelAlign.password);
-        params.append("Introduction", this.formLabelAlign.Introduction);
-        // params.append("question_price", this.form.price);
-        // params.append("sum", this.sum);
-    this.axios.post("/personCustom_api/PersonTp5/public/index/bs/user_edit_sumbit",params)
-    .then(res=>{
-      console.log(res);
-      this.password='';
-      // this.type=res.data.data;
-      // console.log(this.type);
-    })
-        this.$notify({
-          title: '信息',
-          message: '操作成功',
-          duration: 0
-        });
-    this.getPerson_user();
-      //  this.$router.push('/index');
-      },
-
     fill_express_sumbit(){
        this.dialogVisible = false;
        let s=this.express_number;
@@ -464,7 +262,7 @@ export default {
     handleAdd() {
       this.dialog = {
         show: true,
-        title: "添加商品",
+        title: "添加项目",
         option: "add"
       };
       this.formData = {
@@ -479,9 +277,8 @@ export default {
     getMsgFormSon(data) {
       // console.log(this.formData.project_src);
       this.formData.project_src =
-        "http://localhost:8000/personCustom_api/images/user/person/" + data;
+        "http://47.96.175.28/personCustom_api/images/user/person/" + data;
       // console.log(this.formData.project_src);
-      // this.getPerson();
     },
     getPerson_express() {
       this.axios.get("/personCustom_api/PersonTp5/public/index/bs/express_select?id="+this.$store.state.user.username).then(res => {
@@ -494,18 +291,12 @@ export default {
     fill_express(row) {
       this.dialogVisible = true;
       this.order_id=row.order_id;
-    },
-    getPerson_user() {
-      this.axios
-        .get("/personCustom_api/PersonTp5/public/index/bs/person_user_select?id="+this.$store.state.user.username)
-        .then(res => {
-          
-          this.formLabelAlign = res.data.data;
-          console.log(this.formLabelAlign);
 
-        });
-      // console.log('asds');
+
+
+
     },
+
   },
   components: {
     PersonDialog,
@@ -516,24 +307,11 @@ export default {
 <style scoped lang="less">
 
 img {
-  width: 150px;
-  height: 90px;
+  width: 200px;
+  height: 150px;
 }
 .inline {
   width: 70%;
   margin: 0 auto;
-}
-
-.headwidth {
-  width: 70%;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  // border: 1px black solid;
-  img {
-    width: 150px;
-    height: 70px;
-    //   border: 1px black solid;
-  }
 }
 </style>

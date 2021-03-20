@@ -14,12 +14,7 @@
                     </div>
                     <div class="user-item">
                         <i class="el-icon-s-tools"></i>
-                        <span
-                        v-if="$store.state.user.name=='admin'"
-                        >管理员</span>
-                       <span
-                        v-else
-                        >商家</span>
+                        <span>{{$store.state.user.isAdmin=='manager'?'管理员':'会员'}}</span>
                     </div>
                 </div>
 

@@ -76,31 +76,22 @@ export default {
           var params = new URLSearchParams();
           params.append("username", this.loginUser.name);
           params.append("password", this.loginUser.password);
-          this.axios.post("/personCustom_api/loginAdmin.php", params).then(res => {
-            var state = res.data.msg;
+          this.axios.post("/management_api/login.php", params).then(res => {
+            var state = res.data.stauts;
             //   console.log(state);
               console.log(res);
-            if (state === "okok") {
-              localStorage.setItem("eleToken", res.data.data.admin);
-              // localStorage.setItem("isAdmin", res.data.data.identity);
-              // localStorage.setItem("userHead", res.data.data.src);
+            if (state === "0") {
+              localStorage.setItem("eleToken", res.data.data.username);
+              localStorage.setItem("isAdmin", res.data.data.identity);
+              localStorage.setItem("userHead", res.data.data.src);
 
           this.$store.commit("user/USER_NAME", {
-            name: res.data.data.admin,
-            // isAdmin: res.data.data.identity,
-            // userHead:res.data.data.src
+            name: res.data.data.username,
+            isAdmin: res.data.data.identity,
+            userHead:res.data.data.src
           });
 
-          var params = new URLSearchParams();
-          params.append("username", res.data.data.admin);
-              this.axios.post("/personCustom_api/PersonTp5/public/index/bs/log_add1",params).then(res=>
-          {
               this.$router.push("/admin/index");
-          });
-
-
-
-
             } else {
               this.$message({
                 message: "有误",

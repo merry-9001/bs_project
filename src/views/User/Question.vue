@@ -24,15 +24,6 @@
 import Logo from "@/components/User/Logo.vue";
 export default {
   data() {
-    var info = (rule, value, callback) => {
-      if (this.sizeForm.delivery ==false) {
-        callback(new Error('请勾选'));
-      } 
-      else
-      {
-        callback();
-      }
-    };
     return {
       form: {
         desc: "",
@@ -52,33 +43,21 @@ export default {
         var params=new URLSearchParams();
         params.append("username",this.$store.state.user.username);
         params.append("question_content", this.form.desc);
-        // params.append("question_price", this.form.price);
+        params.append("question_price", this.form.price);
         // params.append("sum", this.sum);
     this.axios.post("/personCustom_api/PersonTp5/public/index/bs/question_user_sumbit",params)
     .then(res=>{
       console.log(res);
       // this.type=res.data.data;
       // console.log(this.type);
-        if(res.data.msg==1)
-        {
-              this.$notify({
+    })
+        this.$notify({
           title: '提问',
           message: '您的提问已上交，请耐心等候回复',
           duration: 0
         });
 
-       this.$router.push('/Product');
-       }
-       else
-       {
-         this.$message({
-          showClose: true,
-          message: '账户内积分不足',
-          type: 'error'
-        });
-       }
-    })
-
+       this.$router.push('/index');
       }
   }
 };

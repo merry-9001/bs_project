@@ -39,11 +39,13 @@
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
+
           <div v-if="scope.row.rs_status==0">
-             <el-button  size="mini" @click="handleEdit(scope.$index, scope.row)">解答</el-button>
+             <el-button  size="mini" @click="handleEdit(scope.$index, scope.row)">回复</el-button>
               <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">取消</el-button>
             </div>
             <el-button disabled v-else  size="mini" @click="handleEdit(scope.$index, scope.row)">已完成</el-button>
+         
         </template>
       </el-table-column>
     </el-table>
@@ -123,7 +125,7 @@ export default {
         });
     },
     getPerson() {
-      this.axios.get("/personCustom_api/PersonTp5/public/index/bs/adminResource_select").then(res => {
+      this.axios.get("/personCustom_api/PersonTp5/public/index/bs/resource_select").then(res => {
         console.log(res);
           this.tableData = res.data.data;
           console.log(this.tableData);
@@ -150,7 +152,7 @@ export default {
     },
     getMsgFormSon(data){
         console.log(this.formData.project_src);
-        this.formData.project_src='http://localhost:8000/personCustom_api/images/admin/person/'+data;
+        this.formData.project_src='http://47.96.175.28/personCustom_api/images/admin/person/'+data;
         console.log(this.formData.project_src);
     },
     handleSearch2(){
